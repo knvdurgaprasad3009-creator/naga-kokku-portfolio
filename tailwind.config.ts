@@ -1,7 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Dark design system with a single warm accent.
+ * Dark design system with exactly one accent.
+ *
+ * There is deliberately no secondary accent — teal carries every highlight, and
+ * anything that isn't a highlight is neutral (paper / muted / dim).
  *
  * Every value below is shared with globals.css. To re-accent the whole site,
  * change the three `accent*` entries here and their `--accent*` twins in
@@ -23,8 +26,6 @@ const config: Config = {
         accent: "#00e0b8", // primary accent — CTAs, stats, highlights
         "accent-hover": "#00c3a0", // solid-button hover
         "accent-soft": "rgba(0,224,184,0.14)",
-        accent2: "#4c7cff", // secondary accent — used sparingly
-        "accent2-soft": "rgba(76,124,255,0.14)",
         paper: "#f3f5f6", // primary text
         muted: "#9aa0a6", // secondary text
         dim: "#62676d", // tertiary text / labels

@@ -41,9 +41,9 @@ function TypedLine() {
   }, []);
 
   return (
-    <span className="font-mono text-accent2">
+    <span className="font-mono text-muted">
       {hero.typedPhrases[index]}
-      <span className="ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] animate-pulse-dot bg-accent2" />
+      <span className="ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] animate-pulse-dot bg-muted" />
     </span>
   );
 }

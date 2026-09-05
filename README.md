@@ -84,7 +84,7 @@ LinkedIn only.
 
 ## Design tokens
 
-Dark system with a single accent, defined in both `tailwind.config.ts` and `globals.css`:
+Dark system with exactly one accent, defined in both `tailwind.config.ts` and `globals.css`:
 
 | Token | Value | Use |
 |---|---|---|
@@ -93,11 +93,13 @@ Dark system with a single accent, defined in both `tailwind.config.ts` and `glob
 | `elevated` | `#0E1013` | Raised panels |
 | `accent` | `#00E0B8` | CTAs, stats, highlights |
 | `accent-hover` | `#00C3A0` | Solid-button hover |
-| `accent2` | `#4C7CFF` | Secondary accent, used sparingly |
 | `paper` | `#F3F5F6` | Primary text |
 | `muted` | `#9AA0A6` | Secondary text |
 | `dim` | `#62676D` | Labels, tertiary text |
 | `line` | `rgba(255,255,255,.09)` | Hairlines |
+
+There is deliberately **no secondary accent** — teal carries every
+highlight, and anything that isn't a highlight is neutral.
 
 **To re-accent the whole site**, change the three `accent*` entries in
 `tailwind.config.ts` and their `--accent*` twins in `globals.css`. No component
