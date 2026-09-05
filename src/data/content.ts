@@ -268,7 +268,7 @@ export const experience = [
 /** Summary tiles at the top of the Recognition section. */
 export const recognitionCounts = [
   { value: "2", label: "Patents" },
-  { value: "10", label: "Awards" },
+  { value: "11", label: "Awards" },
   { value: "4", label: "Press features" },
   { value: "4", label: "Certifications" },
 ];
@@ -355,11 +355,27 @@ export const coverage = [
   },
 ];
 
-export const awards = [
-  { name: "Best of Buckman Award", org: "Buckman" },
-  { name: "Buckman GEM Award", org: "Buckman", count: 4 },
-  { name: "TCS Best Impact Award", org: "TCS" },
-  { name: "TCS Star Team Award", org: "TCS", count: 4 },
+/**
+ * Grouped by employer so the section shows recognition at two very different
+ * organisations rather than one flat list. Award names drop the company prefix
+ * — the panel heading already carries it.
+ */
+export const awardGroups = [
+  {
+    org: "Buckman Laboratories",
+    items: [
+      { name: "Best of Buckman Award", count: 1 },
+      { name: "GEM Award", count: 4 },
+    ],
+  },
+  {
+    org: "Tata Consultancy Services",
+    items: [
+      { name: "Best Impact Award", count: 1 },
+      { name: "IP Creation Award", count: 1 },
+      { name: "Star Team Award", count: 4 },
+    ],
+  },
 ];
 
 export const education = [

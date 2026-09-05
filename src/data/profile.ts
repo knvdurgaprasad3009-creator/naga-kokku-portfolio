@@ -173,6 +173,7 @@ with the Indian Patent Office — one granted, one still pending examination:
 - Best of Buckman Award
 - 4× Buckman GEM Awards
 - TCS Best Impact Award
+- TCS IP Creation Award
 - 4× TCS Star Team Awards
 `.trim();
 

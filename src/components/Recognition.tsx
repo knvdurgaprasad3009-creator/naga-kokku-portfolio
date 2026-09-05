@@ -1,5 +1,5 @@
 import {
-  awards,
+  awardGroups,
   certifications,
   coverage,
   education,
@@ -177,24 +177,34 @@ export default function Recognition() {
         ))}
       </div>
 
-      {/* Awards — chips rather than bullets */}
+      {/* Awards — split by employer, so the section shows recognition earned
+          at two very different organisations rather than one flat list */}
       <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
         Awards
       </h3>
-      <div className="mb-12 flex flex-wrap gap-2.5">
-        {awards.map((a) => (
-          <span
-            key={a.name}
-            className="flex items-center gap-2.5 rounded-full border border-line bg-surface py-2 pl-2.5 pr-4"
-          >
-            {a.count && (
-              <span className="rounded-full bg-accent px-2 py-0.5 font-mono text-[10.5px] font-semibold text-ink">
-                {a.count}×
-              </span>
-            )}
-            <span className="text-[13.5px] text-paper">{a.name}</span>
-            <span className="font-mono text-[11px] text-dim">{a.org}</span>
-          </span>
+      <div className="mb-12 grid gap-4 md:grid-cols-2">
+        {awardGroups.map((group) => (
+          <Card key={group.org} className="p-6 sm:p-6">
+            <h4 className="mb-4 border-b border-line pb-3.5 font-mono text-[11px] uppercase tracking-[0.14em] text-dim">
+              {group.org}
+            </h4>
+            <ul>
+              {group.items.map((a) => (
+                <li key={a.name} className="flex items-center gap-3.5 py-2.5">
+                  <span
+                    className={`min-w-[34px] rounded-md py-1 text-center font-mono text-[11.5px] font-semibold ${
+                      a.count > 1
+                        ? "bg-accent-soft text-accent"
+                        : "border border-line text-dim"
+                    }`}
+                  >
+                    {a.count > 1 ? `${a.count}×` : a.count}
+                  </span>
+                  <span className="text-[13.5px] text-paper">{a.name}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
         ))}
       </div>
 
