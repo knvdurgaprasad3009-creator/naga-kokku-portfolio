@@ -178,12 +178,16 @@ export const projects = [
     fig: "04",
     org: "TATA CONSULTANCY SERVICES (R&D)",
     title: "Digital Handloom 4.0 / Bridgital Loom",
-    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented two digital-textile inventions filed as TCS patent applications; showcased at Adobe Summit and AI Impact Summit 2026.",
+    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented two patented digital-textile solutions — one granted, one filed; showcased at Adobe Summit and AI Impact Summit 2026.",
     metrics: [
       { num: "55%", label: "Loom utilization increase" },
       { num: "62%", label: "Downtime reduction" },
     ],
     tags: ["Digital Twin", "Connected Hardware", "IoT", "Patents"],
+    link: {
+      label: "Read the Tata Group story",
+      url: "https://www.tata.com/newsroom/business/tcs-digital-loom",
+    },
   },
 ];
 
@@ -228,7 +232,7 @@ export const experience = [
       "Analyzed 3,000+ operational data points with Python and Power BI, diagnosing ~35% of cycle-time and OEE variation and using the findings to guide process and product changes.",
       "Validated three digital looms with six trained weavers across Chennai and Kanchipuram, achieving independent fabric production across the pilot and generating follow-on requests for additional machines.",
       "Shipped nearly 20 e-commerce and digital-twin releases with 80% on-time delivery, strengthening testing and release-readiness practices after early issues and delivering 17 consecutive releases without blocker defects.",
-      "Co-invented two digital-textile inventions behind Bridgital Loom, both filed as TCS patent applications; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
+      "Co-invented two patented digital-textile solutions behind Bridgital Loom — one granted, one filed; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
     ],
   },
   {
@@ -265,7 +269,7 @@ export const experience = [
 export const recognitionCounts = [
   { value: "2", label: "Patents" },
   { value: "10", label: "Awards" },
-  { value: "2", label: "Degrees" },
+  { value: "4", label: "Press features" },
   { value: "4", label: "Certifications" },
 ];
 
@@ -273,12 +277,10 @@ export const recognitionCounts = [
  * Patents get their own featured treatment. Titles, application numbers and
  * filing dates are taken from the public Indian Patent Office records.
  *
- * NOTE ON STATUS: both records currently show as pending — application
- * 202021022682 is "Reply Filed" (under examination) and 202221064714 is
- * "Awaiting Examination". Neither is shown as granted, so both are labelled
- * "Filed" here rather than "Issued". If a grant has since come through,
- * change that entry's `status` to "Issued" and it renders as a filled accent
- * chip. Don't label one "Issued" without a grant record to point at.
+ * STATUS: 202021022682 is granted (confirmed by Naga; the public QuickCompany
+ * mirror still shows "Reply Filed" and lags the official register).
+ * 202221064714 is "Awaiting Examination" — genuinely still pending, so it stays
+ * "Filed". "Issued" renders a filled accent chip, "Filed" a neutral outline.
  */
 export type Patent = {
   title: string;
@@ -295,7 +297,9 @@ export const patents: Patent[] = [
     title:
       "Method and System for Generating and Weaving a Personalized Pattern on a Fabric",
     org: "Tata Consultancy Services",
-    status: "Filed",
+    // Confirmed as granted by Naga. The public QuickCompany mirror still shows
+    // "Reply Filed" — that listing lags the official register.
+    status: "Issued",
     number: "IN 202021022682",
     filed: "May 2020",
     url: "https://www.quickcompany.in/patents/method-and-system-for-generating-and-weaving-a-personalized-pattern-on-a-fabric",
@@ -307,6 +311,47 @@ export const patents: Patent[] = [
     number: "IN 202221064714",
     filed: "Nov 2022",
     url: "https://www.quickcompany.in/patents/reconfigurable-jacquard-card-assembly",
+  },
+];
+
+/**
+ * Third-party proof — press, broadcast and conference coverage of the work.
+ *
+ * `kind` drives the badge on each card. Titles for the Tata and YouTube entries
+ * were read from the live pages; the Hindu BusinessLine and X entries could not
+ * be fetched (both block automated requests), so those titles are descriptive
+ * and worth a quick check before launch.
+ */
+export const coverage = [
+  {
+    outlet: "Tata Group Newsroom",
+    title: "Code to Cloth: TCS Reinvents Handloom",
+    kind: "Article" as const,
+    meta: "May 2026",
+    url: "https://www.tata.com/newsroom/business/tcs-digital-loom",
+  },
+  {
+    outlet: "India AI Impact Summit 2026",
+    title: "Can AI Really Help India's Weavers Earn More? — Bridgital Loom",
+    kind: "Video" as const,
+    meta: "New Delhi",
+    url: "https://www.youtube.com/watch?v=c9NQyVeuNnw",
+  },
+  {
+    outlet: "The Hindu BusinessLine",
+    title: "How TCS Hopes to Transform Artisans' Lives With Its Bridgital Loom",
+    kind: "Article" as const,
+    meta: "Corporate File",
+    // Resolved from the lnkd.in short link — pointing at the article directly
+    // avoids LinkedIn's interstitial and the shortener rotting.
+    url: "https://www.thehindubusinessline.com/specials/corporate-file/how-tcs-hopes-to-transform-artisans-lives-with-its-bridgital-loom/article66716231.ece",
+  },
+  {
+    outlet: "Shefali Vaidya on X",
+    title: "Bridgital Loom featured in a post on X",
+    kind: "Post" as const,
+    meta: "",
+    url: "https://x.com/ShefVaidya/status/1019116190168281088",
   },
 ];
 

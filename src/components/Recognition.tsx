@@ -1,6 +1,7 @@
 import {
   awards,
   certifications,
+  coverage,
   education,
   patents,
   recognitionCounts,
@@ -132,6 +133,47 @@ export default function Recognition() {
       <div className="mb-12 grid gap-4 md:grid-cols-2">
         {patents.map((p, i) => (
           <PatentCard key={`${p.status}-${i}`} patent={p} />
+        ))}
+      </div>
+
+      {/* Coverage — third-party proof, so it sits high in the section */}
+      <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+        In the press
+      </h3>
+      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+        {coverage.map((c) => (
+          <a
+            key={c.url}
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-start gap-4 rounded-card border border-line bg-surface p-5 transition-colors duration-200 hover:border-accent"
+          >
+            <span className="mt-0.5 shrink-0 rounded-full border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+              {c.kind}
+            </span>
+
+            <span className="min-w-0 flex-1">
+              <span className="block text-[14.5px] font-medium leading-snug text-paper">
+                {c.title}
+              </span>
+              <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 font-mono text-[11.5px] text-dim">
+                <span>{c.outlet}</span>
+                {c.meta && (
+                  <>
+                    <span aria-hidden className="text-line-strong">
+                      ·
+                    </span>
+                    <span>{c.meta}</span>
+                  </>
+                )}
+              </span>
+            </span>
+
+            <span className="mt-0.5 text-dim transition-colors group-hover:text-accent">
+              <ExternalArrow />
+            </span>
+          </a>
         ))}
       </div>
 

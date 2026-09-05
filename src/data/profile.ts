@@ -75,7 +75,7 @@ Reach: six global regions, 3,000 customers, 10,000 sites, 400 sales reps, ~2,000
 - Shipped nearly 20 e-commerce and digital-twin releases with 80% on-time delivery, strengthening
   testing and release-readiness practices after early issues and delivering 17 consecutive releases
   without blocker defects.
-- Co-invented two digital-textile inventions behind Bridgital Loom, both filed as TCS patent applications; the product was later
+- Co-invented two patented digital-textile solutions behind Bridgital Loom — one granted, one filed; the product was later
   showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.
 
 **Digital Innovation Engineer, Jun 2016 — Jun 2018**
@@ -113,10 +113,25 @@ Shanmugha Precision Forging — Manufacturing Engineer (India).
 4. **Digital Handloom 4.0 / Bridgital Loom** (Tata Consultancy Services R&D)
    Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person
    cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+
-   clusters. Co-invented two digital-textile inventions filed as TCS patent applications; showcased at Adobe Summit and AI
+   clusters. Co-invented two patented digital-textile solutions — one granted, one filed; showcased at Adobe Summit and AI
    Impact Summit 2026.
    Headline metrics: 55% loom utilization increase; 62% downtime reduction.
    Themes: digital twin, connected hardware, IoT, patents.
+
+## PRESS & PUBLIC COVERAGE
+The Bridgital Loom work has been covered publicly. Point people at these when
+asked for proof:
+- Tata Group Newsroom, "Code to Cloth: TCS Reinvents Handloom" (May 2026):
+  https://www.tata.com/newsroom/business/tcs-digital-loom
+- India AI Impact Summit 2026, New Delhi — talk on video:
+  https://www.youtube.com/watch?v=c9NQyVeuNnw
+- The Hindu BusinessLine, "How TCS Hopes to Transform Artisans' Lives With Its
+  Bridgital Loom":
+  https://www.thehindubusinessline.com/specials/corporate-file/how-tcs-hopes-to-transform-artisans-lives-with-its-bridgital-loom/article66716231.ece
+- Featured in a post by Shefali Vaidya on X:
+  https://x.com/ShefVaidya/status/1019116190168281088
+
+Only share these four links. Do not invent other coverage, outlets or dates.
 
 ## CORE COMPETENCIES
 
@@ -149,13 +164,12 @@ Azure DevOps, Agile/Scrum, MoSCoW, RICE.
 certification among my credentials.)
 
 ## PATENTS & RECOGNITION
-Co-inventor on two Tata Consultancy Services digital-textile patent
-applications, both filed with the Indian Patent Office and both still pending
-examination (neither is granted yet — say "filed" or "pending", never "granted"
-or "issued"):
+Co-inventor on two Tata Consultancy Services digital-textile patents filed
+with the Indian Patent Office — one granted, one still pending examination:
 - "Method and System for Generating and Weaving a Personalized Pattern on a
-  Fabric" — IN 202021022682, filed May 2020
-- "Reconfigurable Jacquard Card Assembly" — IN 202221064714, filed Nov 2022
+  Fabric" — IN 202021022682, filed May 2020, granted
+- "Reconfigurable Jacquard Card Assembly" — IN 202221064714, filed Nov 2022,
+  pending examination (describe this one as filed/pending, never as granted)
 - Best of Buckman Award
 - 4× Buckman GEM Awards
 - TCS Best Impact Award
