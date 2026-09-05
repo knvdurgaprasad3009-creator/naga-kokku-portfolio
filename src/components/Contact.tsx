@@ -1,29 +1,29 @@
 import { contact, site } from "@/data/content";
-import { Button, Card, Eyebrow, Section } from "./primitives";
+import ContactForm from "./ContactForm";
+import { Button, Eyebrow, Section } from "./primitives";
 
 export default function Contact() {
   return (
     <Section id="contact">
-      <Card className="relative overflow-hidden p-8 sm:p-12">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-          <div>
-            <Eyebrow>Contact</Eyebrow>
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        {/* Pitch + direct routes */}
+        <div>
+          <Eyebrow>Contact</Eyebrow>
 
-            <h2 className="max-w-[620px] font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[38px]">
-              {contact.openTo}
-            </h2>
+          <h2 className="max-w-[520px] font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[36px]">
+            {contact.openTo}
+          </h2>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={`mailto:${site.email}`} variant="primary">
-                Email me
-              </Button>
-              <Button href={site.linkedinUrl} external>
-                Connect on LinkedIn
-              </Button>
-            </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href={`mailto:${site.email}`} variant="primary">
+              Email me
+            </Button>
+            <Button href={site.linkedinUrl} external>
+              Connect on LinkedIn
+            </Button>
           </div>
 
-          <dl className="divide-y divide-line rounded-panel border border-line bg-elevated px-6">
+          <dl className="mt-9 divide-y divide-line rounded-panel border border-line bg-elevated px-6">
             <div className="flex justify-between gap-4 py-4 text-[13.5px]">
               <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
                 Email
@@ -62,7 +62,9 @@ export default function Contact() {
             </div>
           </dl>
         </div>
-      </Card>
+
+        <ContactForm />
+      </div>
     </Section>
   );
 }
