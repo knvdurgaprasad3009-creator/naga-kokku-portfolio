@@ -28,7 +28,9 @@ const config: Config = {
         "accent-soft": "rgba(0,224,184,0.14)",
         paper: "#f3f5f6", // primary text
         muted: "#9aa0a6", // secondary text
-        dim: "#62676d", // tertiary text / labels
+        // 5.08:1 on `ink`. Was #62676d, which measured 3.51:1 and failed WCAG
+        // AA for the small uppercase labels this is used on.
+        dim: "#7a8189", // tertiary text / labels
         line: "rgba(255,255,255,0.09)",
         "line-strong": "rgba(255,255,255,0.18)",
       },

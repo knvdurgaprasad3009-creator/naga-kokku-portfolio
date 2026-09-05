@@ -95,7 +95,7 @@ Dark system with exactly one accent, defined in both `tailwind.config.ts` and `g
 | `accent-hover` | `#00C3A0` | Solid-button hover |
 | `paper` | `#F3F5F6` | Primary text |
 | `muted` | `#9AA0A6` | Secondary text |
-| `dim` | `#62676D` | Labels, tertiary text |
+| `dim` | `#7A8189` | Labels, tertiary text |
 | `line` | `rgba(255,255,255,.09)` | Hairlines |
 
 There is deliberately **no secondary accent** — teal carries every
