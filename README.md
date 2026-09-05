@@ -84,15 +84,15 @@ LinkedIn only.
 
 ## Design tokens
 
-Dark system with a single warm accent, defined in both `tailwind.config.ts` and `globals.css`:
+Dark system with a single accent, defined in both `tailwind.config.ts` and `globals.css`:
 
 | Token | Value | Use |
 |---|---|---|
 | `ink` | `#07080A` | Page background |
 | `surface` | `#121417` | Cards |
 | `elevated` | `#0E1013` | Raised panels |
-| `accent` | `#FF6B35` | CTAs, stats, highlights |
-| `accent-hover` | `#E85A26` | Solid-button hover |
+| `accent` | `#00E0B8` | CTAs, stats, highlights |
+| `accent-hover` | `#00C3A0` | Solid-button hover |
 | `accent2` | `#4C7CFF` | Secondary accent, used sparingly |
 | `paper` | `#F3F5F6` | Primary text |
 | `muted` | `#9AA0A6` | Secondary text |
@@ -105,9 +105,13 @@ hardcodes the colour. Both files list tested alternates in a comment:
 
 | Palette | Accent | Hover | Contrast on `ink` |
 |---|---|---|---|
-| Burnt orange (current) | `#FF6B35` | `#E85A26` | 7.07:1 |
-| Teal | `#00E0B8` | `#00C3A0` | 11.79:1 |
+| Teal (current) | `#00E0B8` | `#00C3A0` | 11.79:1 |
+| Burnt orange | `#FF6B35` | `#E85A26` | 7.07:1 |
 | Lime | `#D4FF3F` | `#C2EE2C` | 17.34:1 |
+
+> Changing `tailwind.config.ts` requires a **dev-server restart** — Tailwind bakes
+> the literal hex into its generated utility classes, so hot reload alone will
+> update `--accent` in CSS but leave `bg-accent` / `text-accent` on the old colour.
 
 Type is Space Grotesk for display headlines, Inter for body, JetBrains Mono for
 labels, stats and the nav — loaded via `next/font/google`.

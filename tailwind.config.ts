@@ -7,10 +7,10 @@ import type { Config } from "tailwindcss";
  * change the three `accent*` entries here and their `--accent*` twins in
  * globals.css. No component hardcodes the colour.
  *
- * Alternates that hold up on this ground:
- *   burnt orange  #ff6b35 / #e85a26   (current)
- *   teal          #00e0b8 / #00c3a0
- *   lime          #d4ff3f / #c2ee2c
+ * Alternates that hold up on this ground (contrast vs. #07080a):
+ *   teal          #00e0b8 / #00c3a0   (current)  11.79:1
+ *   burnt orange  #ff6b35 / #e85a26               7.07:1
+ *   lime          #d4ff3f / #c2ee2c              17.34:1
  */
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
@@ -20,9 +20,9 @@ const config: Config = {
         ink: "#07080a", // page background
         surface: "#121417", // cards
         elevated: "#0e1013", // subtle raised panels
-        accent: "#ff6b35", // primary accent — CTAs, stats, highlights
-        "accent-hover": "#e85a26", // solid-button hover
-        "accent-soft": "rgba(255,107,53,0.14)",
+        accent: "#00e0b8", // primary accent — CTAs, stats, highlights
+        "accent-hover": "#00c3a0", // solid-button hover
+        "accent-soft": "rgba(0,224,184,0.14)",
         accent2: "#4c7cff", // secondary accent — used sparingly
         "accent2-soft": "rgba(76,124,255,0.14)",
         paper: "#f3f5f6", // primary text
