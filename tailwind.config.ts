@@ -1,11 +1,16 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Dark / lime design system.
+ * Dark design system with a single warm accent.
  *
- * Every value below is a single source of truth shared with globals.css.
- * To change the accent across the whole site, edit `accent` here and
- * `--accent` in globals.css — nothing else references the colour directly.
+ * Every value below is shared with globals.css. To re-accent the whole site,
+ * change the three `accent*` entries here and their `--accent*` twins in
+ * globals.css. No component hardcodes the colour.
+ *
+ * Alternates that hold up on this ground:
+ *   burnt orange  #ff6b35 / #e85a26   (current)
+ *   teal          #00e0b8 / #00c3a0
+ *   lime          #d4ff3f / #c2ee2c
  */
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
@@ -15,8 +20,9 @@ const config: Config = {
         ink: "#07080a", // page background
         surface: "#121417", // cards
         elevated: "#0e1013", // subtle raised panels
-        accent: "#d4ff3f", // primary accent — CTAs, stats, highlights
-        "accent-soft": "rgba(212,255,63,0.14)",
+        accent: "#ff6b35", // primary accent — CTAs, stats, highlights
+        "accent-hover": "#e85a26", // solid-button hover
+        "accent-soft": "rgba(255,107,53,0.14)",
         accent2: "#4c7cff", // secondary accent — used sparingly
         "accent2-soft": "rgba(76,124,255,0.14)",
         paper: "#f3f5f6", // primary text

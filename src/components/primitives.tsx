@@ -113,7 +113,7 @@ export function Button({
     "inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200";
   const styles =
     variant === "primary"
-      ? "bg-accent text-ink hover:bg-[#c2ee2c]"
+      ? "bg-accent text-ink hover:bg-accent-hover"
       : "border border-line-strong text-paper hover:border-accent hover:text-accent";
 
   return (

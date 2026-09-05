@@ -186,7 +186,7 @@ export default function AskNaga() {
             <button
               type="submit"
               disabled={busy || !input.trim()}
-              className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-ink transition-colors hover:bg-[#c2ee2c] disabled:cursor-not-allowed disabled:opacity-45"
+              className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-45"
             >
               {busy ? "Thinking…" : "Send"}
             </button>
