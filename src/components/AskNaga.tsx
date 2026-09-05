@@ -2,12 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { chat, site } from "@/data/content";
-import { Brackets, Section, SectionHead } from "./primitives";
+import { Card, Section, SectionHead } from "./primitives";
 
 type Message = { role: "user" | "assistant"; content: string };
-
-const GREETING =
-  "Ask me anything about my product work — the IoT deployments, the RAG assistant, how I prioritize a roadmap. I'll answer from my résumé.";
 
 export default function AskNaga() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -36,7 +33,10 @@ export default function AskNaga() {
       setError(null);
       setInput("");
 
-      const history: Message[] = [...messages, { role: "user", content: question }];
+      const history: Message[] = [
+        ...messages,
+        { role: "user", content: question },
+      ];
       // Render the user turn plus an empty assistant turn to stream into.
       setMessages([...history, { role: "assistant", content: "" }]);
       setBusy(true);
@@ -97,54 +97,47 @@ export default function AskNaga() {
 
   return (
     <Section id="ask">
-      <SectionHead num="06" title="Ask Naga" />
+      <SectionHead
+        eyebrow="AI Twin"
+        title="Ask me anything about my product work."
+        intro="Grounded in my résumé — the IoT deployments, the RAG assistant, how I prioritize a roadmap."
+      />
 
-      <div className="relative border border-line p-6 sm:p-8">
-        <Brackets />
-
-        <span className="absolute -left-px -top-px bg-copper px-[9px] py-1 font-mono text-[11px] text-ink">
-          AI TWIN
-        </span>
-
-        <p className="mb-6 mt-3.5 max-w-[62ch] text-[14.5px] text-paper-dim">
-          {GREETING}
-        </p>
-
-        {/* ---- Transcript ---- */}
+      <Card className="p-0 sm:p-0">
+        {/* Transcript */}
         <div
           ref={scrollRef}
-          className="chat-scroll mb-4 max-h-[420px] min-h-[120px] overflow-y-auto border border-line bg-ink-2/40 p-4 sm:p-5"
+          className="chat-scroll max-h-[440px] min-h-[180px] overflow-y-auto p-6 sm:p-8"
           aria-live="polite"
           aria-atomic="false"
         >
           {!started && (
-            <p className="font-mono text-[12.5px] text-paper-dim">
-              {"// no questions yet — pick a starter below or type your own"}
+            <p className="font-mono text-[12.5px] text-dim">
+              No questions yet — pick a starter below, or type your own.
             </p>
           )}
 
-          <ul className="space-y-4">
+          <ul className="space-y-6">
             {messages.map((m, i) => (
               <li key={i}>
                 <div
-                  className={`mb-1 font-mono text-[11px] tracking-[0.04em] ${
-                    m.role === "user" ? "text-paper-dim" : "text-copper"
+                  className={`mb-2 font-mono text-[10.5px] uppercase tracking-[0.16em] ${
+                    m.role === "user" ? "text-dim" : "text-accent"
                   }`}
                 >
-                  {m.role === "user" ? "YOU" : "NAGA"}
+                  {m.role === "user" ? "You" : site.name.split(" ")[0]}
                 </div>
 
                 <div
-                  className={`max-w-[68ch] whitespace-pre-wrap text-[14.5px] ${
-                    m.role === "user" ? "text-paper" : "text-paper-dim"
+                  className={`max-w-[70ch] whitespace-pre-wrap text-[14.5px] leading-relaxed ${
+                    m.role === "user" ? "text-paper" : "text-muted"
                   }`}
                 >
                   {m.content}
-                  {/* Blinking caret while the last assistant turn is streaming */}
                   {busy &&
                     m.role === "assistant" &&
                     i === messages.length - 1 && (
-                      <span className="ml-0.5 inline-block h-[1em] w-[7px] translate-y-[2px] animate-pulse bg-copper" />
+                      <span className="ml-0.5 inline-block h-[1em] w-[7px] translate-y-[2px] animate-pulse-dot bg-accent" />
                     )}
                 </div>
               </li>
@@ -152,64 +145,64 @@ export default function AskNaga() {
           </ul>
         </div>
 
-        {/* ---- Starter prompts ---- */}
-        {!started && (
-          <div className="mb-4 flex flex-wrap gap-2">
-            {chat.starters.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => send(s)}
-                disabled={busy}
-                className="border border-line px-2.5 py-[7px] font-mono text-[11.5px] text-paper-dim transition-colors hover:border-copper hover:text-copper disabled:opacity-50"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className="border-t border-line p-6 sm:p-8">
+          {!started && (
+            <div className="mb-4 flex flex-wrap gap-2">
+              {chat.starters.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => send(s)}
+                  disabled={busy}
+                  className="rounded-full border border-line px-3.5 py-2 font-mono text-[11.5px] text-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-50"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
 
-        {/* ---- Composer ---- */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            void send(input);
-          }}
-          className="flex flex-col gap-2 sm:flex-row"
-        >
-          <label htmlFor="ask-input" className="sr-only">
-            Ask a question about {site.name}
-          </label>
-          <input
-            id="ask-input"
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={busy}
-            maxLength={1000}
-            autoComplete="off"
-            placeholder="Ask about a project, a metric, or how I work…"
-            className="flex-1 border border-line bg-transparent px-3.5 py-3 text-[14.5px] text-paper placeholder:text-paper-dim/60 focus:border-copper focus:outline-none disabled:opacity-60"
-          />
-          <button
-            type="submit"
-            disabled={busy || !input.trim()}
-            className="border border-copper bg-copper px-[22px] py-3 font-mono text-[13px] font-semibold text-ink transition-colors hover:border-copper-dim hover:bg-copper-dim disabled:cursor-not-allowed disabled:opacity-45"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              void send(input);
+            }}
+            className="flex flex-col gap-2.5 sm:flex-row"
           >
-            {busy ? "THINKING…" : "SEND"}
-          </button>
-        </form>
+            <label htmlFor="ask-input" className="sr-only">
+              Ask a question about {site.name}
+            </label>
+            <input
+              id="ask-input"
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={busy}
+              maxLength={1000}
+              autoComplete="off"
+              placeholder="Ask about a project, a metric, or how I work…"
+              className="flex-1 rounded-full border border-line bg-elevated px-5 py-3 text-[14.5px] text-paper placeholder:text-dim focus:border-accent focus:outline-none disabled:opacity-60"
+            />
+            <button
+              type="submit"
+              disabled={busy || !input.trim()}
+              className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-ink transition-colors hover:bg-[#c2ee2c] disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              {busy ? "Thinking…" : "Send"}
+            </button>
+          </form>
 
-        {error && (
-          <p role="alert" className="mt-3 font-mono text-[12px] text-copper">
-            {error}
+          {error && (
+            <p role="alert" className="mt-3 font-mono text-[12px] text-accent">
+              {error}
+            </p>
+          )}
+
+          <p className="mt-5 text-[11.5px] leading-relaxed text-dim">
+            {chat.disclaimer}
           </p>
-        )}
-
-        <p className="mt-4 border-t border-line pt-4 font-mono text-[11.5px] leading-relaxed text-paper-dim">
-          {chat.disclaimer}
-        </p>
-      </div>
+        </div>
+      </Card>
     </Section>
   );
 }

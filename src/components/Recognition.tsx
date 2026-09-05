@@ -1,33 +1,35 @@
 import { recognition } from "@/data/content";
-import { Section, SectionHead } from "./primitives";
+import { Card, NumPill, Section, SectionHead } from "./primitives";
 
-/** Awards, patents, education and certifications in snapshot-card style panels. */
 export default function Recognition() {
   return (
-    <Section id="recognition" grid>
-      <SectionHead num="05" title="Recognition" />
+    <Section id="recognition">
+      <SectionHead
+        eyebrow="Recognition"
+        title="Awards, patents, and credentials."
+      />
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {recognition.map((panel) => (
-          <div key={panel.num} className="border border-line p-[26px]">
-            <div className="mb-4 flex items-baseline gap-3 border-b border-line pb-3">
-              <span className="font-mono text-[11px] text-copper">
-                {panel.num}
-              </span>
-              <h3 className="text-[15px] font-semibold">{panel.title}</h3>
+          <Card key={panel.num}>
+            <div className="mb-5 flex items-center gap-3 border-b border-line pb-4">
+              <NumPill>{panel.num}</NumPill>
+              <h3 className="font-display text-[16px] font-semibold">
+                {panel.title}
+              </h3>
             </div>
 
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {panel.items.map((item) => (
                 <li
                   key={item}
-                  className="relative pl-4 text-[14px] text-paper-dim before:absolute before:left-0 before:top-[9px] before:h-px before:w-2 before:bg-copper-dim"
+                  className="relative pl-5 text-[14px] text-muted before:absolute before:left-0 before:top-[9px] before:h-1 before:w-1 before:rounded-full before:bg-accent"
                 >
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
+          </Card>
         ))}
       </div>
     </Section>

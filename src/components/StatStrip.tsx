@@ -10,24 +10,9 @@ import {
 import { stats } from "@/data/content";
 
 /**
- * Blueprint dimension-style stat callouts: tick mark + mono numeral, hairline
- * dividers — not big gradient numbers. The count-up is the second half of the
- * page-load moment; it fires once, the first time the strip is on screen.
+ * Stat row with hairline dividers. The count-up fires once, the first time the
+ * strip scrolls into view.
  */
-
-/**
- * Per-cell divider rules. Mobile is a 2×2 grid (right border on the left
- * column, bottom border on the top row); desktop is a single row of four with
- * no trailing edge. Written out per index rather than derived, so Tailwind's
- * scanner sees every literal class.
- */
-const DIVIDERS = [
-  "border-r border-b md:border-b-0",
-  "border-b md:border-b-0 md:border-r",
-  "border-r",
-  "",
-];
-
 function StatValue({
   to,
   decimals,
@@ -45,9 +30,9 @@ function StatValue({
   const mv = useMotionValue(0);
   const final = to.toFixed(decimals);
 
-  // `counted` only takes over once we're client-side and actually animating.
-  // Server-rendered HTML therefore carries the real number, so the stats still
-  // read correctly with JavaScript disabled and to crawlers.
+  // `counted` only takes over once we're client-side and actually animating,
+  // so server-rendered HTML carries the real number — the stats still read
+  // correctly with JavaScript disabled and to crawlers.
   const [counted, setCounted] = useState<string | null>(null);
 
   useEffect(() => {
@@ -60,8 +45,8 @@ function StatValue({
 
     const unsubscribe = mv.on("change", (v) => setCounted(v.toFixed(decimals)));
     const controls = animate(mv, to, {
-      duration: 1.1,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1],
     });
 
     return () => {
@@ -84,12 +69,22 @@ export default function StatStrip() {
   const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <section aria-label="Key results" className="border-y border-line">
-      <div ref={ref} className="mx-auto grid max-w-wrap grid-cols-2 md:grid-cols-4">
+    <section aria-label="Key results" className="border-y border-line px-6">
+      <div
+        ref={ref}
+        className="mx-auto grid max-w-wrap grid-cols-2 gap-px md:grid-cols-4"
+      >
         {stats.map((s, i) => (
-          <div key={s.label} className={`border-line px-8 py-[30px] ${DIVIDERS[i]}`}>
-            <div className="flex items-baseline font-mono text-[30px] font-semibold text-copper">
-              <span className="tick" />
+          <div
+            key={s.label}
+            className={`py-8 sm:py-10 ${i % 2 === 1 ? "pl-6" : "pr-6"} md:pl-6 md:pr-6 ${
+              // Divider between cells only — never a trailing edge.
+              i % 2 === 0 ? "border-r border-line" : "md:border-r md:border-line"
+            } ${i === 3 ? "md:border-r-0" : ""} ${
+              i < 2 ? "border-b border-line md:border-b-0" : ""
+            }`}
+          >
+            <div className="font-display text-[32px] font-semibold leading-none text-accent sm:text-[40px]">
               <StatValue
                 to={s.to}
                 decimals={s.decimals}
@@ -98,7 +93,7 @@ export default function StatStrip() {
                 play={inView}
               />
             </div>
-            <div className="mt-1.5 max-w-[160px] text-[12.5px] text-paper-dim">
+            <div className="mt-3 max-w-[170px] font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
               {s.label}
             </div>
           </div>

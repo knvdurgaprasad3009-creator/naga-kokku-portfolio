@@ -1,88 +1,130 @@
 import type { ReactNode } from "react";
 
 /**
- * Shared blueprint motifs. Everything the mockup repeats — CAD corner brackets,
- * numbered section heads, tag pills — lives here so the four project blocks, the
- * competency clusters and the recognition panels stay visually identical.
+ * Shared building blocks for the dark/lime system: rounded surface cards,
+ * pill tags, numbered section heads. Everything repeated across sections
+ * lives here so the competency, project and recognition blocks stay identical.
  */
-
-/** The four copper CAD-viewport corner brackets, drawn around a bordered box. */
-export function Brackets() {
-  return (
-    <>
-      <span className="bracket bracket-tl" />
-      <span className="bracket bracket-tr" />
-      <span className="bracket bracket-bl" />
-      <span className="bracket bracket-br" />
-    </>
-  );
-}
-
-export function SectionHead({
-  num,
-  title,
-}: {
-  num: string;
-  title: string;
-}) {
-  return (
-    <div className="mb-10 flex items-baseline gap-3.5">
-      <span className="font-mono text-[13px] text-copper-dim">{num}</span>
-      <h2 className="text-[26px] font-semibold leading-tight">{title}</h2>
-    </div>
-  );
-}
 
 export function Section({
   id,
-  grid = false,
   className = "",
   children,
 }: {
   id?: string;
-  grid?: boolean;
   className?: string;
   children: ReactNode;
 }) {
   return (
-    <section
-      id={id}
-      className={`px-8 py-[88px] ${grid ? "grid-bg" : ""} ${className}`}
-    >
+    <section id={id} className={`px-6 py-20 sm:py-28 ${className}`}>
       <div className="mx-auto max-w-wrap">{children}</div>
     </section>
   );
 }
 
+/** Small monospace eyebrow above a section title. */
+export function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <div className="mb-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+      <span className="h-px w-6 bg-accent" />
+      {children}
+    </div>
+  );
+}
+
+export function SectionHead({
+  eyebrow,
+  title,
+  intro,
+}: {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+}) {
+  return (
+    <header className="mb-12 max-w-[720px]">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 className="font-display text-[30px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[42px]">
+        {title}
+      </h2>
+      {intro && <p className="mt-4 text-[15px] text-muted">{intro}</p>}
+    </header>
+  );
+}
+
+/** Rounded surface card — the one container shape used site-wide. */
+export function Card({
+  className = "",
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`rounded-card border border-line bg-surface p-7 sm:p-8 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="border border-line px-2.5 py-[5px] font-mono text-[11.5px] text-paper-dim">
+    <span className="rounded-full border border-line px-3 py-1 font-mono text-[11.5px] text-muted">
       {children}
     </span>
   );
 }
 
-/** Blueprint dimension callout: tick mark + mono numeral + small label. */
-export function Metric({
-  num,
-  label,
-  size = "md",
-}: {
-  num: string;
-  label: string;
-  size?: "md" | "lg";
-}) {
+/** Numbered index pill — "01", "02", … */
+export function NumPill({ children }: { children: ReactNode }) {
+  return (
+    <span className="rounded-full border border-line px-3 py-1 font-mono text-[11px] text-accent">
+      {children}
+    </span>
+  );
+}
+
+export function Metric({ num, label }: { num: string; label: string }) {
   return (
     <div>
-      <div
-        className={`flex items-baseline font-mono font-semibold text-copper ${
-          size === "lg" ? "text-[30px]" : "text-2xl"
-        }`}
-      >
-        <span className="tick" />
+      <div className="font-display text-[26px] font-semibold text-accent">
         {num}
       </div>
-      <div className="mt-0.5 max-w-[180px] text-xs text-paper-dim">{label}</div>
+      <div className="mt-1 max-w-[180px] text-[12.5px] text-dim">{label}</div>
     </div>
+  );
+}
+
+/** Pill button. `variant="primary"` is the solid accent CTA. */
+export function Button({
+  href,
+  variant = "secondary",
+  external = false,
+  children,
+}: {
+  href: string;
+  variant?: "primary" | "secondary";
+  external?: boolean;
+  children: ReactNode;
+}) {
+  const base =
+    "inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200";
+  const styles =
+    variant === "primary"
+      ? "bg-accent text-ink hover:bg-[#c2ee2c]"
+      : "border border-line-strong text-paper hover:border-accent hover:text-accent";
+
+  return (
+    <a
+      href={href}
+      className={`${base} ${styles}`}
+      {...(external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : undefined)}
+    >
+      {children}
+    </a>
   );
 }

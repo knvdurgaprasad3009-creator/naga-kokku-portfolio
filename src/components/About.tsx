@@ -1,38 +1,63 @@
-import { about } from "@/data/content";
-import { Section, SectionHead } from "./primitives";
+import Image from "next/image";
+import { about, site } from "@/data/content";
+import { Card, Section, SectionHead } from "./primitives";
 
 export default function About() {
   return (
-    <Section id="about" grid>
-      <SectionHead num="01" title="About" />
+    <Section id="about">
+      <SectionHead
+        eyebrow="About"
+        title="Hardware instincts. Enterprise software execution."
+      />
 
-      <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr]">
-        <div>
-          {about.paragraphs.map((p) => (
-            <p
-              key={p.slice(0, 40)}
-              className="mb-4 max-w-[60ch] text-[15.5px] text-paper-dim"
-            >
-              {p}
-            </p>
-          ))}
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        {/* Portrait — moved here from the hero, which is now full-bleed type.
+            The source is a tall 478x1024 crop, so it's framed to a 4:5 box with
+            object-cover rather than left to run the full column height. */}
+        <div className="mx-auto w-full max-w-[340px] lg:mx-0 lg:max-w-none">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-line">
+            <Image
+              src="/headshot.jpg"
+              alt={`${site.name}, ${site.title}`}
+              width={478}
+              height={1024}
+              sizes="(max-width: 1024px) 340px, 500px"
+              className="h-full w-full object-cover object-top"
+            />
+          </div>
+          <div className="mt-4 flex items-center gap-2.5 font-mono text-[11.5px] text-dim">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            {site.location}
+          </div>
         </div>
 
-        <dl className="h-fit border border-line p-[26px]">
-          {about.snapshot.map((row, i) => (
-            <div
-              key={row.label}
-              className={`flex justify-between gap-4 py-3 text-sm ${
-                i === about.snapshot.length - 1 ? "" : "border-b border-line"
-              }`}
-            >
-              <dt className="shrink-0 font-mono text-[12.5px] text-paper-dim">
-                {row.label}
-              </dt>
-              <dd className="max-w-[60%] text-right text-paper">{row.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <div>
+          <div className="space-y-4">
+            {about.paragraphs.map((p) => (
+              <p key={p.slice(0, 40)} className="text-[15px] text-muted">
+                {p}
+              </p>
+            ))}
+          </div>
+
+          <Card className="mt-8">
+            <dl className="divide-y divide-line">
+              {about.snapshot.map((row) => (
+                <div
+                  key={row.label}
+                  className="flex justify-between gap-5 py-3 text-[14px] first:pt-0 last:pb-0"
+                >
+                  <dt className="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                    {row.label}
+                  </dt>
+                  <dd className="max-w-[62%] text-right text-paper">
+                    {row.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Card>
+        </div>
       </div>
     </Section>
   );

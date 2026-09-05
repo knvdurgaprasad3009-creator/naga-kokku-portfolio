@@ -2,32 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens — lifted verbatim from the approved mockup. Kept as CSS
-   variables alongside the Tailwind theme so raw CSS (grid, brackets, scrollbar)
-   and utility classes reference the same values. */
+/* Design tokens. Mirrored in tailwind.config.ts — change both together. */
 :root {
-  --ink: #0e2233;
-  --ink-2: #132c42;
-  --paper: #ede6d6;
-  --paper-dim: #b9c2c9;
-  --copper: #c97d3d;
-  --copper-dim: #8f5a2c;
-  --line: rgba(237, 230, 214, 0.18);
+  --bg: #07080a;
+  --bg-card: #121417;
+  --bg-elevated: #0e1013;
+  --accent: #d4ff3f;
+  --accent-soft: rgba(212, 255, 63, 0.14);
+  --accent-2: #4c7cff;
+  --text: #f3f5f6;
+  --text-muted: #9aa0a6;
+  --text-dim: #62676d;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* The site is a single committed dark blueprint palette — it does not follow
-   the OS light/dark preference. */
+/* A single committed dark palette — the site does not follow the OS theme. */
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  /* Sticky nav is 65px; keep anchored sections clear of it. */
-  scroll-padding-top: 88px;
+  scroll-padding-top: 96px;
 }
 
 body {
-  background: var(--ink);
-  color: var(--paper);
-  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,67 +39,40 @@ body {
 }
 
 @layer components {
-  /* Subtle 48px blueprint grid — hero and alternating sections. */
-  .grid-bg {
-    background-image: linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 48px 48px;
-    background-position: -1px -1px;
-  }
-
   .wrap {
-    max-width: 1120px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
-  /* CAD-viewport corner bracket. Positioned by the .tl/.tr/.bl/.br modifier. */
-  .bracket {
+  /* Outlined display type — the second line of the hero headline. */
+  .text-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px var(--text);
+  }
+
+  /* Soft radial wash behind the hero. Keeps the flat near-black from
+     reading as dead space without introducing a visible gradient band. */
+  .hero-glow::before {
+    content: "";
     position: absolute;
-    width: 22px;
-    height: 22px;
-    border-color: var(--copper);
-    border-style: solid;
+    inset: -20% 0 auto -10%;
+    height: 620px;
     pointer-events: none;
-  }
-  .bracket-tl {
-    top: -8px;
-    left: -8px;
-    border-width: 2px 0 0 2px;
-  }
-  .bracket-tr {
-    top: -8px;
-    right: -8px;
-    border-width: 2px 2px 0 0;
-  }
-  .bracket-bl {
-    bottom: -8px;
-    left: -8px;
-    border-width: 0 0 2px 2px;
-  }
-  .bracket-br {
-    bottom: -8px;
-    right: -8px;
-    border-width: 0 2px 2px 0;
+    background: radial-gradient(
+      55% 55% at 20% 30%,
+      var(--accent-soft) 0%,
+      transparent 70%
+    );
+    filter: blur(20px);
   }
 }
 
-@layer utilities {
-  /* Blueprint dimension tick that precedes every mono stat numeral. */
-  .tick {
-    display: inline-block;
-    width: 14px;
-    height: 1px;
-    background: var(--copper-dim);
-    margin-right: 6px;
-  }
-}
-
-/* Chat transcript scrollbar, tuned to the palette rather than the OS default. */
+/* Chat transcript scrollbar, tuned to the palette. */
 .chat-scroll {
   scrollbar-width: thin;
-  scrollbar-color: var(--copper-dim) transparent;
+  scrollbar-color: var(--line-strong) transparent;
 }
 .chat-scroll::-webkit-scrollbar {
   width: 8px;
@@ -107,21 +81,25 @@ body {
   background: transparent;
 }
 .chat-scroll::-webkit-scrollbar-thumb {
-  background: var(--copper-dim);
+  background: var(--line-strong);
+  border-radius: 999px;
 }
 
-/* Keyboard focus is visible everywhere; mouse clicks don't draw a ring. */
+/* Keyboard focus is visible; mouse clicks don't draw a ring. */
 :focus-visible {
-  outline: 2px solid var(--copper);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* The skills ticker pauses on hover and stops entirely for reduced-motion. */
+/* The skills ticker pauses on hover and stops for reduced-motion. */
 .ticker-track:hover {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
   .ticker-track {
+    animation: none !important;
+  }
+  .animate-pulse-dot {
     animation: none !important;
   }
 }

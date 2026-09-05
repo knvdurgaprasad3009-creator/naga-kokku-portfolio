@@ -16,30 +16,29 @@ export default function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-line transition-colors duration-300 ${
-        scrolled ? "bg-ink/90 backdrop-blur-sm" : "bg-ink"
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "border-b border-line bg-ink/80 backdrop-blur-md"
+          : "border-b border-transparent"
       }`}
     >
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-wrap items-center justify-between px-8 py-[22px]"
+        className="mx-auto flex max-w-wrap items-center justify-between px-6 py-4"
       >
         <a
           href="#top"
-          className="font-mono text-sm tracking-[0.02em] text-paper transition-colors hover:text-copper"
+          className="font-display text-[15px] font-semibold tracking-tight transition-colors hover:text-accent"
         >
-          {site.brandLeft}
-          <span className="text-copper">·</span>
-          {site.brandRight}
+          {site.shortName}
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden gap-7 text-sm text-paper-dim md:flex">
+        <ul className="hidden items-center gap-7 text-[13.5px] text-muted lg:flex">
           {nav.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="transition-colors hover:text-copper"
+                className="transition-colors hover:text-paper"
               >
                 {item.label}
               </a>
@@ -47,29 +46,37 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          className="font-mono text-[13px] text-paper-dim transition-colors hover:text-copper md:hidden"
-        >
-          {open ? "CLOSE" : "MENU"}
-        </button>
+        <div className="flex items-center gap-3">
+          <a
+            href={`mailto:${site.email}`}
+            className="hidden rounded-full border border-line-strong px-4 py-2 font-mono text-[12px] transition-colors hover:border-accent hover:text-accent sm:inline-block"
+          >
+            Get in touch
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            className="rounded-full border border-line-strong px-4 py-2 font-mono text-[12px] text-muted transition-colors hover:border-accent hover:text-accent lg:hidden"
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </nav>
 
       {open && (
         <ul
           id="mobile-nav"
-          className="border-t border-line px-8 pb-5 pt-3 md:hidden"
+          className="border-t border-line bg-ink px-6 pb-5 pt-3 lg:hidden"
         >
           {nav.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="block py-2 font-mono text-[13px] text-paper-dim transition-colors hover:text-copper"
+                className="block py-2.5 text-[14px] text-muted transition-colors hover:text-accent"
               >
                 {item.label}
               </a>

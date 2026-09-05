@@ -5,6 +5,8 @@
 
 export const site = {
   name: "Naga Prasad Kokku",
+  /** Nav brand and footer — the full three-part name is too wide for the bar. */
+  shortName: "Naga Kokku",
   brandLeft: "NAGA",
   brandRight: "KOKKU",
   title: "Product Manager — IoT, AI & Enterprise Platforms",
@@ -25,12 +27,24 @@ export const nav = [
 ];
 
 export const hero = {
-  kicker: "PRODUCT MANAGER — IoT, AI & ENTERPRISE PLATFORMS",
-  headline: "Product leadership across IoT, AI & enterprise platforms.",
+  /** Status pill above the headline. */
+  status: "Open to Product Manager / Senior PM roles",
+  /**
+   * The H1, split into display lines. The middle line renders as outlined
+   * type, so keep it the shortest of the three.
+   */
+  headlineLines: ["PRODUCT LEADERSHIP", "ACROSS IoT, AI &", "ENTERPRISE PLATFORMS"],
+  outlinedLine: 1,
+  /** Rotating phrases in the typed line under the headline. */
+  typedPhrases: [
+    "Industrial IoT",
+    "AI & RAG Systems",
+    "Enterprise Platforms",
+    "Digital Twins",
+  ],
   sub: "7+ years building and commercializing enterprise, Industrial IoT, RAG, digital-twin, and asset-management products across global operations. I turn physical operations data into intelligent, automated software — uncovering $7.2M in unmanaged spend and eliminating $4M in unnecessary purchases along the way.",
-  photoTag: "FIG.01 — MEMPHIS, TN",
-  primaryCta: { label: "Start a conversation", href: "#contact" },
-  secondaryCta: { label: "View flagship work", href: "#projects" },
+  primaryCta: { label: "Start a Conversation", href: "#contact" },
+  secondaryCta: { label: "View Flagship Work", href: "#projects" },
 };
 
 /**

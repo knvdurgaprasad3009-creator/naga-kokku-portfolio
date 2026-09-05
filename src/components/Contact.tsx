@@ -1,74 +1,68 @@
 import { contact, site } from "@/data/content";
-import { Section, SectionHead } from "./primitives";
+import { Button, Card, Eyebrow, Section } from "./primitives";
 
 export default function Contact() {
   return (
-    <Section id="contact" grid>
-      <SectionHead num="07" title="Contact" />
+    <Section id="contact">
+      <Card className="relative overflow-hidden p-8 sm:p-12">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
+            <Eyebrow>Contact</Eyebrow>
 
-      <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-        <div>
-          <div className="mb-[22px] flex items-center gap-2.5 font-mono text-[13px] text-copper">
-            <span className="inline-block h-px w-[22px] shrink-0 bg-copper" />
-            OPEN TO
+            <h2 className="max-w-[620px] font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[38px]">
+              {contact.openTo}
+            </h2>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={`mailto:${site.email}`} variant="primary">
+                Email me
+              </Button>
+              <Button href={site.linkedinUrl} external>
+                Connect on LinkedIn
+              </Button>
+            </div>
           </div>
 
-          <p className="max-w-[540px] text-[26px] font-semibold leading-[1.25] tracking-[-0.01em]">
-            {contact.openTo}
-          </p>
+          <dl className="divide-y divide-line rounded-panel border border-line bg-elevated px-6">
+            <div className="flex justify-between gap-4 py-4 text-[13.5px]">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                Email
+              </dt>
+              <dd className="max-w-[64%] break-words text-right">
+                <a
+                  href={`mailto:${site.email}`}
+                  className="transition-colors hover:text-accent"
+                >
+                  {site.email}
+                </a>
+              </dd>
+            </div>
 
-          <div className="mt-[34px] flex flex-wrap gap-3.5">
-            <a
-              href={`mailto:${site.email}`}
-              className="border border-copper bg-copper px-[22px] py-[13px] font-mono text-[13.5px] font-semibold text-ink transition-colors hover:border-copper-dim hover:bg-copper-dim"
-            >
-              Email me
-            </a>
-            <a
-              href={site.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-copper px-[22px] py-[13px] font-mono text-[13.5px] text-copper transition-colors hover:bg-copper hover:text-ink"
-            >
-              Connect on LinkedIn
-            </a>
-          </div>
+            <div className="flex justify-between gap-4 py-4 text-[13.5px]">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                LinkedIn
+              </dt>
+              <dd className="max-w-[64%] break-words text-right">
+                <a
+                  href={site.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-accent"
+                >
+                  {site.linkedinLabel}
+                </a>
+              </dd>
+            </div>
+
+            <div className="flex justify-between gap-4 py-4 text-[13.5px]">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                Location
+              </dt>
+              <dd className="text-right">{site.location}</dd>
+            </div>
+          </dl>
         </div>
-
-        {/* Mirrors the hero contact line, in snapshot-panel form. */}
-        <dl className="border border-line p-[26px]">
-          <div className="flex justify-between gap-4 border-b border-line py-3 text-sm">
-            <dt className="font-mono text-[12.5px] text-paper-dim">EMAIL</dt>
-            <dd className="max-w-[65%] break-words text-right">
-              <a
-                href={`mailto:${site.email}`}
-                className="transition-colors hover:text-copper"
-              >
-                {site.email}
-              </a>
-            </dd>
-          </div>
-
-          <div className="flex justify-between gap-4 border-b border-line py-3 text-sm">
-            <dt className="font-mono text-[12.5px] text-paper-dim">LINKEDIN</dt>
-            <dd className="max-w-[65%] break-words text-right">
-              <a
-                href={site.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-copper"
-              >
-                {site.linkedinLabel}
-              </a>
-            </dd>
-          </div>
-
-          <div className="flex justify-between gap-4 py-3 text-sm">
-            <dt className="font-mono text-[12.5px] text-paper-dim">LOCATION</dt>
-            <dd className="text-right">{site.location}</dd>
-          </div>
-        </dl>
-      </div>
+      </Card>
     </Section>
   );
 }

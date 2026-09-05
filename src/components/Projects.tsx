@@ -1,47 +1,55 @@
 import { projects } from "@/data/content";
-import { Brackets, Metric, Section, SectionHead, Tag } from "./primitives";
+import { Card, Metric, Section, SectionHead, Tag } from "./primitives";
 
-/**
- * Four case-study blocks in the mockup's viewport style: hairline border, a
- * copper FIG tag notched into the top-left corner, CAD brackets, and blueprint
- * dimension callouts for the headline metrics.
- */
 export default function Projects() {
   return (
-    <Section id="projects" grid>
-      <SectionHead num="03" title="Flagship Work" />
+    <Section id="projects">
+      <SectionHead
+        eyebrow="Flagship Work"
+        title="Four products, taken from discovery to production."
+      />
 
-      <div className="grid gap-12">
+      <div className="grid gap-5">
         {projects.map((p) => (
-          <article key={p.fig} className="relative border border-line p-[34px]">
-            <Brackets />
+          <Card
+            key={p.fig}
+            className="transition-colors duration-200 hover:border-line-strong"
+          >
+            <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-start">
+              <div>
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="font-mono text-[11px] text-accent">
+                    {p.fig}
+                  </span>
+                  <span aria-hidden className="h-px w-5 bg-line-strong" />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                    {p.org}
+                  </span>
+                </div>
 
-            <span className="absolute -left-px -top-px bg-copper px-[9px] py-1 font-mono text-[11px] text-ink">
-              FIG.{p.fig}
-            </span>
+                <h3 className="mb-3 max-w-[560px] font-display text-[21px] font-semibold leading-snug sm:text-[24px]">
+                  {p.title}
+                </h3>
 
-            <div className="mt-3.5 font-mono text-xs text-copper">{p.org}</div>
+                <p className="max-w-[62ch] text-[14.5px] text-muted">
+                  {p.body}
+                </p>
 
-            <h3 className="mb-3.5 mt-2.5 max-w-[540px] text-[21px] font-semibold leading-snug">
-              {p.title}
-            </h3>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.tags.map((tag) => (
+                    <Tag key={tag}>{tag}</Tag>
+                  ))}
+                </div>
+              </div>
 
-            <p className="mb-[22px] max-w-[65ch] text-[14.5px] text-paper-dim">
-              {p.body}
-            </p>
-
-            <div className="mb-5 flex flex-wrap gap-10">
-              {p.metrics.map((m) => (
-                <Metric key={m.label} num={m.num} label={m.label} />
-              ))}
+              {/* Headline metrics, pulled out of the prose */}
+              <div className="flex gap-10 rounded-panel border border-line bg-elevated p-6 lg:flex-col lg:gap-6">
+                {p.metrics.map((m) => (
+                  <Metric key={m.label} num={m.num} label={m.label} />
+                ))}
+              </div>
             </div>
-
-            <div className="flex flex-wrap gap-2">
-              {p.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
-          </article>
+          </Card>
         ))}
       </div>
     </Section>

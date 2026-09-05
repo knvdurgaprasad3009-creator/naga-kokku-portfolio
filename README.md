@@ -2,8 +2,8 @@
 
 Personal portfolio site with an "Ask Naga" AI assistant grounded in my résumé.
 
-Built from `claude-code-build-brief.md`, with copy from `portfolio-content-draft.md`
-and the visual direction from `portfolio-mockup.html`.
+Built from `claude-code-build-brief.md`, with copy from `portfolio-content-draft.md`.
+The visual direction is a dark near-black theme with a lime accent.
 
 **Stack:** Next.js 14 (App Router) · TypeScript · Tailwind CSS · Framer Motion ·
 Anthropic API · deployed on Vercel.
@@ -56,10 +56,10 @@ src/
   app/
     layout.tsx        Fonts, metadata, <html> shell
     page.tsx          Composes the 10 sections in order
-    globals.css       Design tokens + blueprint motifs (grid, brackets, tick)
+    globals.css       Design tokens + shared effects (glow, outline type)
     api/chat/route.ts "Ask Naga" backend — streams from the Anthropic API
   components/
-    primitives.tsx    Shared motifs: Brackets, SectionHead, Section, Tag, Metric
+    primitives.tsx    Section, SectionHead, Card, Tag, NumPill, Metric, Button
     Nav.tsx  Hero.tsx  StatStrip.tsx  SkillsTicker.tsx  About.tsx
     Competencies.tsx  Projects.tsx  Timeline.tsx  Recognition.tsx
     AskNaga.tsx  Contact.tsx  Footer.tsx
@@ -84,26 +84,31 @@ LinkedIn only.
 
 ## Design tokens
 
-Extracted from the approved mockup and defined in both `tailwind.config.ts` and
-`globals.css`:
+Dark / lime system, defined in both `tailwind.config.ts` and `globals.css`:
 
 | Token | Value | Use |
 |---|---|---|
-| `ink` | `#0E2233` | Background |
-| `ink-2` | `#132C42` | Secondary surface |
-| `paper` | `#EDE6D6` | Primary text |
-| `paper-dim` | `#B9C2C9` | Secondary text |
-| `copper` | `#C97D3D` | CTAs, stats, highlights |
-| `copper-dim` | `#8F5A2C` | Subdued accent |
-| `line` | `rgba(237,230,214,0.18)` | Hairlines, grid |
+| `ink` | `#07080A` | Page background |
+| `surface` | `#121417` | Cards |
+| `elevated` | `#0E1013` | Raised panels |
+| `accent` | `#D4FF3F` | CTAs, stats, highlights |
+| `accent2` | `#4C7CFF` | Secondary accent, used sparingly |
+| `paper` | `#F3F5F6` | Primary text |
+| `muted` | `#9AA0A6` | Secondary text |
+| `dim` | `#62676D` | Labels, tertiary text |
+| `line` | `rgba(255,255,255,.09)` | Hairlines |
 
-Type is IBM Plex Sans for headings and body, IBM Plex Mono for data, labels,
-stats and the nav brand — loaded via `next/font/google`.
+**To change the accent site-wide**, edit `accent` in `tailwind.config.ts` and
+`--accent` in `globals.css`. Nothing else references the colour directly.
 
-**Motion:** exactly one orchestrated moment — the hero text stagger plus the CAD
-bracket reveal on load, and the stat count-up when the strip first scrolls into
-view. Nothing else fades up on scroll. Everything respects
-`prefers-reduced-motion`.
+Type is Space Grotesk for display headlines, Inter for body, JetBrains Mono for
+labels, stats and the nav — loaded via `next/font/google`.
+
+**Motion:** exactly one orchestrated moment — the staggered hero reveal on load,
+plus the stat count-up when the strip first scrolls into view. Nothing else fades
+up on scroll. Reduced motion is handled by `<MotionConfig reducedMotion="user">`
+rather than by branching render output on `useReducedMotion()`, which would cause
+a hydration mismatch.
 
 ---
 

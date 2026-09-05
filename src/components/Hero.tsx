@@ -1,168 +1,143 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import { MotionConfig, motion, type Variants } from "framer-motion";
 import { hero, site } from "@/data/content";
+import { Button } from "./primitives";
 
 /**
- * The one orchestrated animation on the site: a single staggered reveal of the
- * hero text plus the CAD corner brackets drawing themselves in around the
- * photo. Nothing else animates on scroll — per the design brief this is the one
- * memorable moment, not a page full of fade-ups.
+ * The one orchestrated animation on the site: a staggered reveal of the status
+ * pill, the display headline lines, and the supporting copy.
  *
  * Reduced motion is delegated to <MotionConfig reducedMotion="user">, which
- * drops the transform half of each variant at runtime. It deliberately is NOT
- * handled by branching on useReducedMotion() here: that hook resolves to null
- * during SSR and to the real preference on the client, so branching the
- * rendered output on it produces a hydration mismatch.
+ * drops transform animations at runtime. It deliberately is NOT handled by
+ * branching on useReducedMotion(): that hook resolves to null during SSR and to
+ * the real preference on the client, which produces a hydration mismatch.
  */
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
 const rise: Variants = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
-const frame: Variants = {
-  hidden: { opacity: 0, scale: 0.985 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 },
-  },
-};
+/** Cycles the accent phrase under the headline with a blinking caret. */
+function TypedLine() {
+  const [index, setIndex] = useState(0);
 
-const bracketIn: Variants = {
-  hidden: { opacity: 0, scale: 0.4 },
-  show: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.4, delay: 0.55 + i * 0.08, ease: "easeOut" },
-  }),
-};
+  useEffect(() => {
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % hero.typedPhrases.length),
+      2600,
+    );
+    return () => clearInterval(id);
+  }, []);
 
-const BRACKET_POS = [
-  "bracket-tl",
-  "bracket-tr",
-  "bracket-bl",
-  "bracket-br",
-] as const;
+  return (
+    <span className="font-mono text-accent2">
+      {hero.typedPhrases[index]}
+      <span className="ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] animate-pulse-dot bg-accent2" />
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
     <MotionConfig reducedMotion="user">
-      <section id="top" className="grid-bg relative px-8 pb-24 pt-[88px]">
+      <section
+        id="top"
+        className="hero-glow relative overflow-hidden px-6 pb-20 pt-16 sm:pb-28 sm:pt-24"
+      >
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="mx-auto grid max-w-wrap items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]"
+          className="relative mx-auto max-w-wrap"
         >
-          {/* ---- Text column ---- */}
-          <div>
-            <motion.p
-              variants={rise}
-              className="mb-[22px] flex items-center gap-2.5 font-mono text-[13px] text-copper"
-            >
-              <span className="inline-block h-px w-[22px] shrink-0 bg-copper" />
-              {hero.kicker}
-            </motion.p>
-
-            <motion.h1
-              variants={rise}
-              className="max-w-[560px] text-[32px] font-semibold leading-[1.18] tracking-[-0.01em] text-paper sm:text-[44px]"
-            >
-              {hero.headline}
-            </motion.h1>
-
-            <motion.p
-              variants={rise}
-              className="mt-[22px] max-w-[520px] text-[16.5px] text-paper-dim"
-            >
-              7+ years building and commercializing enterprise, Industrial IoT,
-              RAG, digital-twin, and asset-management products across global
-              operations. I turn physical operations data into intelligent,
-              automated software — uncovering{" "}
-              <b className="font-semibold text-paper">$7.2M</b> in unmanaged
-              spend and eliminating{" "}
-              <b className="font-semibold text-paper">$4M</b> in unnecessary
-              purchases along the way.
-            </motion.p>
-
-            <motion.div
-              variants={rise}
-              className="mt-[34px] flex flex-wrap gap-3.5"
-            >
-              <a
-                href={hero.primaryCta.href}
-                className="border border-copper bg-copper px-[22px] py-[13px] font-mono text-[13.5px] font-semibold text-ink transition-colors hover:border-copper-dim hover:bg-copper-dim"
-              >
-                {hero.primaryCta.label}
-              </a>
-              <a
-                href={hero.secondaryCta.href}
-                className="border border-copper px-[22px] py-[13px] font-mono text-[13.5px] text-copper transition-colors hover:bg-copper hover:text-ink"
-              >
-                {hero.secondaryCta.label}
-              </a>
-            </motion.div>
-
-            <motion.div
-              variants={rise}
-              className="mt-10 flex flex-wrap gap-[18px] font-mono text-[13.5px] text-paper-dim"
-            >
-              <span>{site.location}</span>
-              <a
-                href={`mailto:${site.email}`}
-                className="transition-colors hover:text-copper"
-              >
-                {site.email}
-              </a>
-              <a
-                href={site.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-copper"
-              >
-                {site.linkedinLabel}
-              </a>
-            </motion.div>
-          </div>
-
-          {/* ---- Photo column: CAD viewport, not a soft-shadow card ---- */}
-          <motion.div
-            variants={frame}
-            className="relative mb-8 w-full max-w-[220px] sm:max-w-[340px] lg:mb-14 lg:ml-auto"
-          >
-            {BRACKET_POS.map((pos, i) => (
-              <motion.span
-                key={pos}
-                custom={i}
-                variants={bracketIn}
-                className={`bracket ${pos}`}
-              />
-            ))}
-
-            <Image
-              src="/headshot.jpg"
-              alt={`${site.name}, ${site.title}`}
-              width={680}
-              height={850}
-              priority
-              sizes="(max-width: 640px) 220px, 340px"
-              className="block h-auto w-full border border-line contrast-[1.03] saturate-[0.9]"
-            />
-
-            <span className="absolute -bottom-[30px] -left-2 font-mono text-[11px] tracking-[0.03em] text-paper-dim">
-              {hero.photoTag}
+          {/* Availability pill */}
+          <motion.div variants={rise}>
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent-soft px-4 py-2 font-mono text-[12px] text-accent">
+              <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-accent" />
+              {hero.status}
             </span>
+          </motion.div>
+
+          {/* Display headline — the outlined line is set in content.ts */}
+          {/* No `uppercase` here on purpose — the lines are already cased in
+              content.ts, which keeps "IoT" correct rather than "IOT". */}
+          <h1 className="mt-8 font-display text-[clamp(34px,7.4vw,84px)] font-semibold leading-[1.04] tracking-[-0.02em]">
+            {hero.headlineLines.map((line, i) => (
+              <motion.span
+                key={line}
+                variants={rise}
+                className={`block ${i === hero.outlinedLine ? "text-outline" : ""}`}
+              >
+                {line}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p
+            variants={rise}
+            className="mt-6 font-mono text-[15px] sm:text-[17px]"
+          >
+            <TypedLine />
+          </motion.p>
+
+          <motion.p
+            variants={rise}
+            className="mt-6 max-w-[620px] text-[15px] leading-relaxed text-muted sm:text-[16px]"
+          >
+            7+ years building and commercializing enterprise, Industrial IoT,
+            RAG, digital-twin, and asset-management products across global
+            operations. I turn physical operations data into intelligent,
+            automated software — uncovering{" "}
+            <b className="font-semibold text-paper">$7.2M</b> in unmanaged spend
+            and eliminating <b className="font-semibold text-paper">$4M</b> in
+            unnecessary purchases along the way.
+          </motion.p>
+
+          <motion.div variants={rise} className="mt-9 flex flex-wrap gap-3">
+            <Button href={hero.primaryCta.href} variant="primary">
+              {hero.primaryCta.label}
+            </Button>
+            <Button href={hero.secondaryCta.href}>
+              {hero.secondaryCta.label}
+            </Button>
+          </motion.div>
+
+          <motion.div
+            variants={rise}
+            className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[12.5px] text-dim"
+          >
+            <span>{site.location}</span>
+            <span aria-hidden className="text-line-strong">
+              /
+            </span>
+            <a
+              href={`mailto:${site.email}`}
+              className="transition-colors hover:text-accent"
+            >
+              {site.email}
+            </a>
+            <span aria-hidden className="text-line-strong">
+              /
+            </span>
+            <a
+              href={site.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              {site.linkedinLabel}
+            </a>
           </motion.div>
         </motion.div>
       </section>

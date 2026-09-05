@@ -1,18 +1,22 @@
 import { competencies } from "@/data/content";
-import { Section, SectionHead, Tag } from "./primitives";
+import { Card, NumPill, Section, SectionHead, Tag } from "./primitives";
 
 export default function Competencies() {
   return (
     <Section id="competencies">
-      <SectionHead num="02" title="Core Competencies" />
+      <SectionHead
+        eyebrow="Expertise"
+        title="Three clusters I build products in."
+      />
 
-      <div className="grid gap-px border border-line bg-line md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-3">
         {competencies.map((cluster) => (
-          <div key={cluster.num} className="bg-ink p-7">
-            <div className="mb-2 font-mono text-[11px] text-copper">
-              {cluster.num}
-            </div>
-            <h3 className="mb-5 text-[17px] font-semibold leading-snug">
+          <Card
+            key={cluster.num}
+            className="transition-colors duration-200 hover:border-line-strong"
+          >
+            <NumPill>{cluster.num}</NumPill>
+            <h3 className="mb-5 mt-5 font-display text-[19px] font-semibold leading-snug">
               {cluster.title}
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -20,7 +24,7 @@ export default function Competencies() {
                 <Tag key={tag}>{tag}</Tag>
               ))}
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </Section>
