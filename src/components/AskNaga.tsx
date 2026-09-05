@@ -97,13 +97,28 @@ export default function AskNaga() {
 
   return (
     <Section id="ask">
-      <SectionHead
-        eyebrow="AI Twin"
-        title="Ask me anything about my product work."
-        intro="Grounded in my résumé — the IoT deployments, the RAG assistant, how I prioritize a roadmap."
-      />
+      <SectionHead eyebrow="AI Twin" title={chat.title} intro={chat.intro} />
 
       <Card className="p-0 sm:p-0">
+        {/* Identity header */}
+        <div className="flex items-center gap-3.5 border-b border-line p-5 sm:px-8">
+          <span
+            aria-hidden
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent font-display text-[15px] font-bold text-ink"
+          >
+            {chat.initials}
+          </span>
+          <span className="min-w-0">
+            <span className="block text-[14.5px] font-semibold text-paper">
+              {chat.handle}
+            </span>
+            <span className="mt-0.5 flex items-center gap-2 font-mono text-[11.5px] text-accent">
+              <span className="h-1.5 w-1.5 shrink-0 animate-pulse-dot rounded-full bg-accent" />
+              {chat.statusLine}
+            </span>
+          </span>
+        </div>
+
         {/* Transcript */}
         <div
           ref={scrollRef}
@@ -111,11 +126,10 @@ export default function AskNaga() {
           aria-live="polite"
           aria-atomic="false"
         >
-          {!started && (
-            <p className="font-mono text-[12.5px] text-dim">
-              No questions yet — pick a starter below, or type your own.
-            </p>
-          )}
+          {/* Opening message — always shown, never sent to the API */}
+          <div className="mb-6 rounded-panel border border-line bg-elevated p-4 text-[14.5px] leading-relaxed text-paper sm:p-5">
+            {chat.greeting}
+          </div>
 
           <ul className="space-y-6">
             {messages.map((m, i) => (

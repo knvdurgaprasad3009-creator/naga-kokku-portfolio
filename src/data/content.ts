@@ -381,6 +381,20 @@ export const certifications = [
 ];
 
 export const chat = {
+  title: "Chat With My AI Twin",
+  intro:
+    "Ask about my experience, flagship projects, leadership approach, or tech stack — answered in my voice, grounded in what's actually on this profile.",
+  /** Chat header identity block. */
+  initials: "NK",
+  handle: "Naga Prasad Kokku — AI Twin",
+  statusLine: "Grounded in my real profile",
+  /**
+   * The twin's opening message. Purely presentational — it is never sent to
+   * the API, which requires the conversation to open on a user turn.
+   * First person, matching the system prompt's voice.
+   */
+  greeting:
+    "Hi, I'm Naga's AI twin. Ask me anything about my experience, the Industrial IoT and RAG products I've shipped, how I lead cross-functional teams, or the stack I build with.",
   starters: [
     "What's your biggest product win?",
     "How do you approach IoT product development?",
