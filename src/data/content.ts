@@ -28,7 +28,7 @@ export const nav = [
 
 export const hero = {
   /** Status pill above the headline. */
-  status: "Open to Product Manager / Senior PM roles",
+  status: "Open to Product Manager, Senior PM & AI Product Manager roles",
   /**
    * The H1, split into display lines. The middle line renders as outlined
    * type, so keep it the shortest of the three.
@@ -87,14 +87,14 @@ export const about = {
   paragraphs: [
     "Product leader with 7+ years spanning Buckman Laboratories and Tata Consultancy Services, connecting physical operations, enterprise software, and intelligent automation. I have commercialized SaaS and Industrial IoT products across six global regions, 3,000 customers, and 10,000 sites — taking products from Figma prototype to 100% adoption in production.",
     "My work sits at the intersection of hardware and software: from RAG-powered order-intake bots with 95% accuracy, to connected-loom digital twins that increased manufacturing utilization by 55%. I lead cross-functional teams across Engineering, Finance, Supply Chain, SAP, and Legal, and I prioritize ruthlessly with MoSCoW and RICE to protect the highest-ROI work.",
-    "MS in Industrial and Systems Engineering (University of Minnesota), BS in Mechatronics Engineering. CSPO certified, Microsoft Certified Power BI Data Analyst.",
+    "MS in Industrial and Systems Engineering (University of Minnesota), BS in Mechatronics Engineering. CSPO certified and a Certified AI Product Manager.",
   ],
   snapshot: [
     { label: "BASED IN", value: "Memphis, TN" },
     { label: "CURRENT ROLE", value: "Digital Product Specialist (PM), Buckman Laboratories" },
     { label: "PRIOR ROLE", value: "Digital Innovation Product Lead, TCS" },
     { label: "EDUCATION", value: "MS, Industrial & Systems Engineering — U Minnesota" },
-    { label: "CERTIFICATION", value: "CSPO · Power BI Data Analyst Associate" },
+    { label: "CERTIFICATION", value: "CSPO · Certified AI Product Manager" },
     { label: "FOCUS", value: "Industrial IoT × Enterprise Product Management" },
   ],
 };
@@ -178,7 +178,7 @@ export const projects = [
     fig: "04",
     org: "TATA CONSULTANCY SERVICES (R&D)",
     title: "Digital Handloom 4.0 / Bridgital Loom",
-    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented two patented digital-textile solutions; showcased at Adobe Summit and AI Impact Summit 2026.",
+    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented two digital-textile inventions filed as TCS patent applications; showcased at Adobe Summit and AI Impact Summit 2026.",
     metrics: [
       { num: "55%", label: "Loom utilization increase" },
       { num: "62%", label: "Downtime reduction" },
@@ -228,7 +228,7 @@ export const experience = [
       "Analyzed 3,000+ operational data points with Python and Power BI, diagnosing ~35% of cycle-time and OEE variation and using the findings to guide process and product changes.",
       "Validated three digital looms with six trained weavers across Chennai and Kanchipuram, achieving independent fabric production across the pilot and generating follow-on requests for additional machines.",
       "Shipped nearly 20 e-commerce and digital-twin releases with 80% on-time delivery, strengthening testing and release-readiness practices after early issues and delivering 17 consecutive releases without blocker defects.",
-      "Co-invented two patented digital-textile solutions behind Bridgital Loom; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
+      "Co-invented two digital-textile inventions behind Bridgital Loom, both filed as TCS patent applications; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
     ],
   },
   {
@@ -261,41 +261,78 @@ export const experience = [
   },
 ];
 
-export const recognition = [
+/** Summary tiles at the top of the Recognition section. */
+export const recognitionCounts = [
+  { value: "2", label: "Patents" },
+  { value: "10", label: "Awards" },
+  { value: "2", label: "Degrees" },
+  { value: "4", label: "Certifications" },
+];
+
+/**
+ * Patents get their own featured treatment. Titles, application numbers and
+ * filing dates are taken from the public Indian Patent Office records.
+ *
+ * NOTE ON STATUS: both records currently show as pending — application
+ * 202021022682 is "Reply Filed" (under examination) and 202221064714 is
+ * "Awaiting Examination". Neither is shown as granted, so both are labelled
+ * "Filed" here rather than "Issued". If a grant has since come through,
+ * change that entry's `status` to "Issued" and it renders as a filled accent
+ * chip. Don't label one "Issued" without a grant record to point at.
+ */
+export type Patent = {
+  title: string;
+  org: string;
+  /** "Issued" renders a filled accent chip; "Filed" renders a neutral outline. */
+  status: "Issued" | "Filed";
+  number: string;
+  filed: string;
+  url: string;
+};
+
+export const patents: Patent[] = [
   {
-    num: "01",
-    title: "Awards",
-    items: [
-      "Best of Buckman Award",
-      "4× Buckman GEM Awards",
-      "TCS Best Impact Award",
-      "4× TCS Star Team Awards",
-    ],
+    title:
+      "Method and System for Generating and Weaving a Personalized Pattern on a Fabric",
+    org: "Tata Consultancy Services",
+    status: "Filed",
+    number: "IN 202021022682",
+    filed: "May 2020",
+    url: "https://www.quickcompany.in/patents/method-and-system-for-generating-and-weaving-a-personalized-pattern-on-a-fabric",
   },
   {
-    num: "02",
-    title: "Patents",
-    items: ["Inventor on 2 TCS digital-textile patents (1 issued, 1 filed)"],
+    title: "Reconfigurable Jacquard Card Assembly",
+    org: "Tata Consultancy Services",
+    status: "Filed",
+    number: "IN 202221064714",
+    filed: "Nov 2022",
+    url: "https://www.quickcompany.in/patents/reconfigurable-jacquard-card-assembly",
+  },
+];
+
+export const awards = [
+  { name: "Best of Buckman Award", org: "Buckman" },
+  { name: "Buckman GEM Award", org: "Buckman", count: 4 },
+  { name: "TCS Best Impact Award", org: "TCS" },
+  { name: "TCS Star Team Award", org: "TCS", count: 4 },
+];
+
+export const education = [
+  {
+    degree: "MS, Industrial and Systems Engineering",
+    school: "University of Minnesota, Twin Cities",
   },
   {
-    num: "03",
-    title: "Education",
-    items: [
-      "MS, Industrial and Systems Engineering — University of Minnesota, Twin Cities",
-      "BS, Mechatronics Engineering — SASTRA University, India",
-    ],
+    degree: "BS, Mechatronics Engineering",
+    school: "SASTRA University, India",
   },
-  {
-    num: "04",
-    title: "Certifications",
-    items: [
-      "Certified Scrum Product Owner (CSPO), Scrum Alliance",
-      "Microsoft Certified: Power BI Data Analyst Associate",
-      "Project Management Certificate, Carlson School of Management",
-      "Generative AI for Product Managers",
-      "AI Product Manager Certification, CodeBasics (in progress)",
-    ],
-  },
+];
+
+export const certifications = [
+  { name: "Certified Scrum Product Owner (CSPO)", org: "Scrum Alliance" },
+  { name: "Certified AI Product Manager", org: "CodeBasics" },
+  { name: "Project Management Certificate", org: "Carlson School of Management" },
+  { name: "Generative AI for Product Managers", org: "" },
 ];
 
 export const chat = {
@@ -310,5 +347,5 @@ export const chat = {
 
 export const contact = {
   openTo:
-    "Product Manager / Senior Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms",
+    "Product Manager / Senior Product Manager / AI Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms",
 };

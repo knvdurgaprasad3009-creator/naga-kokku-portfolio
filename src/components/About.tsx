@@ -40,19 +40,21 @@ export default function About() {
             ))}
           </div>
 
+          {/* Fixed label column with left-aligned values, so both columns share
+              a consistent edge. The previous justify-between layout right-aligned
+              the values, which left their left edges ragged and wrapped long
+              entries into a narrow, uneven block. */}
           <Card className="mt-8">
             <dl className="divide-y divide-line">
               {about.snapshot.map((row) => (
                 <div
                   key={row.label}
-                  className="flex justify-between gap-5 py-3 text-[14px] first:pt-0 last:pb-0"
+                  className="grid grid-cols-1 gap-x-6 gap-y-1 py-3.5 text-[14px] first:pt-0 last:pb-0 sm:grid-cols-[132px_1fr]"
                 >
-                  <dt className="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-dim">
+                  <dt className="font-mono text-[11px] uppercase leading-5 tracking-[0.12em] text-dim">
                     {row.label}
                   </dt>
-                  <dd className="max-w-[62%] text-right text-paper">
-                    {row.value}
-                  </dd>
+                  <dd className="leading-5 text-paper">{row.value}</dd>
                 </div>
               ))}
             </dl>

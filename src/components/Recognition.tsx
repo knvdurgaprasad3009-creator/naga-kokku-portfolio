@@ -1,36 +1,204 @@
-import { recognition } from "@/data/content";
-import { Card, NumPill, Section, SectionHead } from "./primitives";
+import {
+  awards,
+  certifications,
+  education,
+  patents,
+  recognitionCounts,
+  type Patent,
+} from "@/data/content";
+import { Card, Section, SectionHead } from "./primitives";
+
+/**
+ * Recognition previously read as four identical bullet lists, which blended
+ * into the surrounding prose. It now leads with a row of count tiles, gives
+ * patents a featured two-card treatment with status chips, and turns awards
+ * into scannable chips — so the section carries visual weight of its own.
+ */
+
+function ExternalArrow() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="shrink-0"
+    >
+      <path d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  );
+}
+
+function PatentCard({ patent }: { patent: Patent }) {
+  const linked = Boolean(patent.url);
+  const issued = patent.status === "Issued";
+
+  const inner = (
+    <>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <span
+          className={`rounded-full px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.14em] ${
+            issued
+              ? "bg-accent text-ink"
+              : "border border-line-strong text-muted"
+          }`}
+        >
+          {patent.status}
+        </span>
+
+        {linked && (
+          <span className="flex items-center gap-1.5 font-mono text-[11px] text-dim transition-colors group-hover:text-accent">
+            View record
+            <ExternalArrow />
+          </span>
+        )}
+      </div>
+
+      <h4 className="font-display text-[16.5px] font-semibold leading-snug text-paper">
+        {patent.title}
+      </h4>
+
+      <div className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11.5px] text-dim">
+        <span>{patent.org}</span>
+        {patent.number && (
+          <>
+            <span aria-hidden className="text-line-strong">
+              ·
+            </span>
+            <span>{patent.number}</span>
+          </>
+        )}
+        {patent.filed && (
+          <>
+            <span aria-hidden className="text-line-strong">
+              ·
+            </span>
+            <span>Filed {patent.filed}</span>
+          </>
+        )}
+      </div>
+    </>
+  );
+
+  const base =
+    "group relative rounded-card border border-line bg-surface p-6 transition-colors duration-200";
+
+  // Renders as a plain card until a URL exists — no dead links ship.
+  return linked ? (
+    <a
+      href={patent.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${base} block hover:border-accent`}
+    >
+      {inner}
+    </a>
+  ) : (
+    <div className={base}>{inner}</div>
+  );
+}
 
 export default function Recognition() {
   return (
     <Section id="recognition">
       <SectionHead
         eyebrow="Recognition"
-        title="Awards, patents, and credentials."
+        title="Patents, awards, and credentials."
       />
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {recognition.map((panel) => (
-          <Card key={panel.num}>
-            <div className="mb-5 flex items-center gap-3 border-b border-line pb-4">
-              <NumPill>{panel.num}</NumPill>
-              <h3 className="font-display text-[16px] font-semibold">
-                {panel.title}
-              </h3>
+      {/* Count tiles — gives the section an anchor before the detail */}
+      <div className="mb-10 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-4">
+        {recognitionCounts.map((c) => (
+          <div key={c.label} className="bg-surface px-6 py-6">
+            <div className="font-display text-[30px] font-semibold leading-none text-accent">
+              {c.value}
             </div>
-
-            <ul className="space-y-3">
-              {panel.items.map((item) => (
-                <li
-                  key={item}
-                  className="relative pl-5 text-[14px] text-muted before:absolute before:left-0 before:top-[9px] before:h-1 before:w-1 before:rounded-full before:bg-accent"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Card>
+            <div className="mt-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-dim">
+              {c.label}
+            </div>
+          </div>
         ))}
+      </div>
+
+      {/* Patents — featured */}
+      <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+        Patents
+      </h3>
+      <div className="mb-12 grid gap-4 md:grid-cols-2">
+        {patents.map((p, i) => (
+          <PatentCard key={`${p.status}-${i}`} patent={p} />
+        ))}
+      </div>
+
+      {/* Awards — chips rather than bullets */}
+      <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+        Awards
+      </h3>
+      <div className="mb-12 flex flex-wrap gap-2.5">
+        {awards.map((a) => (
+          <span
+            key={a.name}
+            className="flex items-center gap-2.5 rounded-full border border-line bg-surface py-2 pl-2.5 pr-4"
+          >
+            {a.count && (
+              <span className="rounded-full bg-accent px-2 py-0.5 font-mono text-[10.5px] font-semibold text-ink">
+                {a.count}×
+              </span>
+            )}
+            <span className="text-[13.5px] text-paper">{a.name}</span>
+            <span className="font-mono text-[11px] text-dim">{a.org}</span>
+          </span>
+        ))}
+      </div>
+
+      {/* Education + certifications */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+            Education
+          </h3>
+          <ul className="space-y-5">
+            {education.map((e) => (
+              <li key={e.degree}>
+                <div className="text-[14.5px] font-medium text-paper">
+                  {e.degree}
+                </div>
+                <div className="mt-1 font-mono text-[11.5px] text-dim">
+                  {e.school}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card>
+          <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+            Certifications
+          </h3>
+          <ul className="space-y-4">
+            {certifications.map((c) => (
+              <li key={c.name} className="flex items-start gap-3">
+                <span
+                  aria-hidden
+                  className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                />
+                <span>
+                  <span className="text-[14.5px] text-paper">{c.name}</span>
+                  {c.org && (
+                    <span className="ml-2 font-mono text-[11.5px] text-dim">
+                      {c.org}
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Card>
       </div>
     </Section>
   );

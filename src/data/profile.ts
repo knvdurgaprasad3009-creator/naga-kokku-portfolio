@@ -16,7 +16,7 @@ Headline: Senior Product Manager, Industrial IoT & Enterprise Platforms
 Location: Memphis, TN
 Email: knvdurgaprasad3009@gmail.com
 LinkedIn: https://www.linkedin.com/in/knvdurgaprasad/
-Open to: Product Manager / Senior Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms
+Open to: Product Manager / Senior Product Manager / AI Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms
 
 ## SUMMARY
 7+ years of Product Management and product-lead experience across Buckman Laboratories and Tata
@@ -75,7 +75,7 @@ Reach: six global regions, 3,000 customers, 10,000 sites, 400 sales reps, ~2,000
 - Shipped nearly 20 e-commerce and digital-twin releases with 80% on-time delivery, strengthening
   testing and release-readiness practices after early issues and delivering 17 consecutive releases
   without blocker defects.
-- Co-invented two patented digital-textile solutions behind Bridgital Loom; the product was later
+- Co-invented two digital-textile inventions behind Bridgital Loom, both filed as TCS patent applications; the product was later
   showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.
 
 **Digital Innovation Engineer, Jun 2016 — Jun 2018**
@@ -113,7 +113,7 @@ Shanmugha Precision Forging — Manufacturing Engineer (India).
 4. **Digital Handloom 4.0 / Bridgital Loom** (Tata Consultancy Services R&D)
    Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person
    cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+
-   clusters. Co-invented two patented digital-textile solutions; showcased at Adobe Summit and AI
+   clusters. Co-invented two digital-textile inventions filed as TCS patent applications; showcased at Adobe Summit and AI
    Impact Summit 2026.
    Headline metrics: 55% loom utilization increase; 62% downtime reduction.
    Themes: digital twin, connected hardware, IoT, patents.
@@ -141,13 +141,21 @@ Azure DevOps, Agile/Scrum, MoSCoW, RICE.
 
 ## CERTIFICATIONS
 - Certified Scrum Product Owner (CSPO), Scrum Alliance
-- Microsoft Certified: Power BI Data Analyst Associate
+- Certified AI Product Manager, CodeBasics
 - Project Management Certificate, Carlson School of Management
 - Generative AI for Product Managers
-- AI Product Manager Certification, CodeBasics — in progress
+
+(Power BI remains a tool I work in day to day; I no longer list a Power BI
+certification among my credentials.)
 
 ## PATENTS & RECOGNITION
-- Inventor on two TCS digital-textile patents (one issued, one filed)
+Co-inventor on two Tata Consultancy Services digital-textile patent
+applications, both filed with the Indian Patent Office and both still pending
+examination (neither is granted yet — say "filed" or "pending", never "granted"
+or "issued"):
+- "Method and System for Generating and Weaving a Personalized Pattern on a
+  Fabric" — IN 202021022682, filed May 2020
+- "Reconfigurable Jacquard Card Assembly" — IN 202221064714, filed Nov 2022
 - Best of Buckman Award
 - 4× Buckman GEM Awards
 - TCS Best Impact Award
