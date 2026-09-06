@@ -12,7 +12,7 @@
  *
  * NEXT_PUBLIC_* is inlined at build time, so changing it needs a redeploy.
  */
-const CANONICAL = "https://kokkutech.com";
+const CANONICAL = "https://kokkutech.online";
 
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??

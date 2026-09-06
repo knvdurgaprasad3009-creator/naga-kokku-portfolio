@@ -235,7 +235,7 @@ at **build** time, so set it in Vercel before deploying, not after.
 - **`not-found.tsx`** is an on-brand 404 marked `noindex`.
 
 All URLs resolve against `siteUrl` in `src/lib/site-url.ts`, which resolves in
-this order: `NEXT_PUBLIC_SITE_URL` → the canonical domain (`kokkutech.com`) on
+this order: `NEXT_PUBLIC_SITE_URL` → the canonical domain (`kokkutech.online`) on
 Vercel production → `VERCEL_URL` on previews → localhost.
 
 The canonical domain is hardcoded rather than read from `VERCEL_URL`, because
