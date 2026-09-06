@@ -64,24 +64,26 @@ function PatentCard({ patent }: { patent: Patent }) {
         {patent.title}
       </h4>
 
+      {/* Granted patents lead with the patent number and grant date; pending
+          ones show the application number and filing date. */}
       <div className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11.5px] text-dim">
         <span>{patent.org}</span>
-        {patent.number && (
-          <>
-            <span aria-hidden className="text-line-strong">
-              ·
-            </span>
-            <span>{patent.number}</span>
-          </>
-        )}
-        {patent.filed && (
-          <>
-            <span aria-hidden className="text-line-strong">
-              ·
-            </span>
-            <span>Filed {patent.filed}</span>
-          </>
-        )}
+
+        <span aria-hidden className="text-line-strong">
+          ·
+        </span>
+        <span>
+          {issued
+            ? `Patent ${patent.patentNumber}`
+            : `App. ${patent.applicationNumber}`}
+        </span>
+
+        <span aria-hidden className="text-line-strong">
+          ·
+        </span>
+        <span>
+          {issued ? "Issued" : "Filed"} {patent.date}
+        </span>
       </div>
     </>
   );

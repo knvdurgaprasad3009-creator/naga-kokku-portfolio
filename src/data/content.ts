@@ -178,7 +178,7 @@ export const projects = [
     fig: "04",
     org: "TATA CONSULTANCY SERVICES (R&D)",
     title: "Digital Handloom 4.0 / Bridgital Loom",
-    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented two patented digital-textile solutions — one granted, one filed; showcased at Adobe Summit and AI Impact Summit 2026.",
+    body: "Productized a connected hardware, e-commerce, and digital-twin platform, leading a 14-person cross-functional team on a $1.2M, 36-month initiative. Field discovery with 60+ weavers across 15+ clusters. Co-invented three patented digital-textile solutions — two granted, one filed; showcased at Adobe Summit and AI Impact Summit 2026.",
     metrics: [
       { num: "55%", label: "Loom utilization increase" },
       { num: "62%", label: "Downtime reduction" },
@@ -232,7 +232,7 @@ export const experience = [
       "Analyzed 3,000+ operational data points with Python and Power BI, diagnosing ~35% of cycle-time and OEE variation and using the findings to guide process and product changes.",
       "Validated three digital looms with six trained weavers across Chennai and Kanchipuram, achieving independent fabric production across the pilot and generating follow-on requests for additional machines.",
       "Shipped nearly 20 e-commerce and digital-twin releases with 80% on-time delivery, strengthening testing and release-readiness practices after early issues and delivering 17 consecutive releases without blocker defects.",
-      "Co-invented two patented digital-textile solutions behind Bridgital Loom — one granted, one filed; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
+      "Co-invented three patented digital-textile solutions behind Bridgital Loom — two granted, one filed; the product was later showcased at Adobe Summit in Las Vegas and AI Impact Summit 2026 in New Delhi.",
     ],
   },
   {
@@ -267,7 +267,7 @@ export const experience = [
 
 /** Summary tiles at the top of the Recognition section. */
 export const recognitionCounts = [
-  { value: "2", label: "Patents" },
+  { value: "3", label: "Patents" },
   { value: "11", label: "Awards" },
   { value: "4", label: "Press features" },
   { value: "4", label: "Certifications" },
@@ -277,18 +277,22 @@ export const recognitionCounts = [
  * Patents get their own featured treatment. Titles, application numbers and
  * filing dates are taken from the public Indian Patent Office records.
  *
- * STATUS: 202021022682 is granted (confirmed by Naga; the public QuickCompany
- * mirror still shows "Reply Filed" and lags the official register).
- * 202221064714 is "Awaiting Examination" — genuinely still pending, so it stays
- * "Filed". "Issued" renders a filled accent chip, "Filed" a neutral outline.
+ * STATUS: grant numbers and issue dates supplied by Naga from the official
+ * register. The public QuickCompany mirrors lag it — as of this writing they
+ * still list both granted applications as pending — so don't "correct" these
+ * back from those pages. "Issued" renders a filled accent chip, "Filed" a
+ * neutral outline.
  */
 export type Patent = {
   title: string;
   org: string;
   /** "Issued" renders a filled accent chip; "Filed" renders a neutral outline. */
   status: "Issued" | "Filed";
-  number: string;
-  filed: string;
+  /** Granted patent number. Empty while an application is still pending. */
+  patentNumber: string;
+  applicationNumber: string;
+  /** Grant date for issued patents, filing date for pending ones. */
+  date: string;
   url: string;
 };
 
@@ -297,20 +301,30 @@ export const patents: Patent[] = [
     title:
       "Method and System for Generating and Weaving a Personalized Pattern on a Fabric",
     org: "Tata Consultancy Services",
-    // Confirmed as granted by Naga. The public QuickCompany mirror still shows
-    // "Reply Filed" — that listing lags the official register.
     status: "Issued",
-    number: "IN 202021022682",
-    filed: "May 2020",
+    patentNumber: "600899",
+    applicationNumber: "202021022682",
+    date: "31 Aug 2026",
     url: "https://www.quickcompany.in/patents/method-and-system-for-generating-and-weaving-a-personalized-pattern-on-a-fabric",
   },
   {
     title: "Reconfigurable Jacquard Card Assembly",
     org: "Tata Consultancy Services",
-    status: "Filed",
-    number: "IN 202221064714",
-    filed: "Nov 2022",
+    status: "Issued",
+    patentNumber: "589573",
+    applicationNumber: "202221064714",
+    date: "18 May 2026",
     url: "https://www.quickcompany.in/patents/reconfigurable-jacquard-card-assembly",
+  },
+  {
+    title:
+      "Method and System to Verify and Reconfigure Design Values of Reconfigurable Jacquard Cards",
+    org: "Tata Consultancy Services",
+    status: "Filed",
+    patentNumber: "",
+    applicationNumber: "202421077311",
+    date: "11 Oct 2024",
+    url: "https://patents.justia.com/patent/20260103827",
   },
 ];
 
