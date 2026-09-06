@@ -28,7 +28,7 @@ export const nav = [
 
 export const hero = {
   /** Status pill above the headline. */
-  status: "Open to Product Manager, Senior PM & AI Product Manager roles",
+  status: "Open to Product Manager & Senior Product Manager roles",
   /**
    * The H1, split into display lines. The middle line renders as outlined
    * type, so keep it the shortest of the three.
@@ -422,5 +422,5 @@ export const chat = {
 
 export const contact = {
   openTo:
-    "Product Manager / Senior Product Manager / AI Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms",
+    "Product Manager / Senior Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms",
 };

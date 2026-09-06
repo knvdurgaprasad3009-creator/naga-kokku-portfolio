@@ -16,7 +16,7 @@ Headline: Senior Product Manager, Industrial IoT & Enterprise Platforms
 Location: Memphis, TN
 Email: knvdurgaprasad3009@gmail.com
 LinkedIn: https://www.linkedin.com/in/knvdurgaprasad/
-Open to: Product Manager / Senior Product Manager / AI Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms
+Open to: Product Manager / Senior Product Manager roles — Industrial IoT, AI Products & Enterprise Platforms
 
 ## SUMMARY
 7+ years of Product Management and product-lead experience across Buckman Laboratories and Tata
