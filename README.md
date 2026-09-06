@@ -234,7 +234,14 @@ at **build** time, so set it in Vercel before deploying, not after.
   lettered so it renders identically everywhere, with no font dependency.
 - **`not-found.tsx`** is an on-brand 404 marked `noindex`.
 
-All URLs resolve against `siteUrl` in `src/lib/site-url.ts`.
+All URLs resolve against `siteUrl` in `src/lib/site-url.ts`, which resolves in
+this order: `NEXT_PUBLIC_SITE_URL` → the canonical domain (`kokkutech.com`) on
+Vercel production → `VERCEL_URL` on previews → localhost.
+
+The canonical domain is hardcoded rather than read from `VERCEL_URL`, because
+that variable is the per-deployment hostname — using it in production would make
+every build advertise a different canonical URL and publish share-card links
+that rot.
 
 ---
 
