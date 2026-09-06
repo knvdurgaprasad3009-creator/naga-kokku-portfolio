@@ -28,7 +28,7 @@ export const nav = [
 
 export const hero = {
   /** Status pill above the headline. */
-  status: "Product Manager / Senior Product Manager roles",
+  status: "Open to Product Manager / Senior Product Manager roles",
   /**
    * The H1, split into display lines. The middle line renders as outlined
    * type, so keep it the shortest of the three.
