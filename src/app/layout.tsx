@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import { site } from "@/data/content";
+import { certifications, education, site } from "@/data/content";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 /** Display face — headlines and section titles only. */
@@ -27,17 +28,6 @@ const jetbrainsMono = JetBrains_Mono({
 
 const description =
   "Naga Prasad Kokku — Product Manager with 7+ years building and commercializing enterprise, Industrial IoT, RAG, and digital-twin products across six global regions.";
-
-/**
- * Absolute base for OG/Twitter image URLs. Vercel injects VERCEL_URL per
- * deployment; set NEXT_PUBLIC_SITE_URL once a custom domain is attached so
- * share cards point at the canonical host rather than the preview URL.
- */
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
 
 /** Regenerate with `npm run og` after changing the name, title or stats. */
 const ogImage = {
@@ -88,6 +78,50 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+/**
+ * Person schema. Helps search engines connect the name to the role, employer
+ * and credentials — which is most of the job for a portfolio that people reach
+ * by searching the name.
+ */
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.title,
+  description,
+  url: siteUrl,
+  image: `${siteUrl}/og.png`,
+  email: `mailto:${site.email}`,
+  sameAs: [site.linkedinUrl],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Memphis",
+    addressRegion: "TN",
+    addressCountry: "US",
+  },
+  worksFor: {
+    "@type": "Organization",
+    name: "Buckman Laboratories International Inc.",
+  },
+  alumniOf: education.map((e) => ({
+    "@type": "CollegeOrUniversity",
+    name: e.school,
+  })),
+  hasCredential: certifications.map((c) => ({
+    "@type": "EducationalOccupationalCredential",
+    name: c.name,
+    ...(c.org ? { recognizedBy: { "@type": "Organization", name: c.org } } : {}),
+  })),
+  knowsAbout: [
+    "Product Management",
+    "Industrial IoT",
+    "Retrieval-Augmented Generation",
+    "Digital Twins",
+    "Enterprise Platforms",
+    "Supply Chain Optimization",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -98,7 +132,23 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-ink font-sans text-paper antialiased">{children}</body>
+      <body className="bg-ink font-sans text-paper antialiased">
+        {/* Reachable by keyboard, invisible until focused. */}
+        <a
+          href="#about"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink"
+        >
+          Skip to content
+        </a>
+
+        {children}
+
+        <script
+          type="application/ld+json"
+          // Serialised from a local object, so there is no untrusted input here.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Naga Kokku">
+  <!-- Geometric weave mark: a nod to the loom work, and font-independent so it
+       renders identically in browser tabs and in the generated Apple icon. -->
+  <rect width="64" height="64" rx="15" fill="#00e0b8"/>
+  <g fill="#07080a">
+    <rect x="12" y="12" width="17" height="17" rx="3"/>
+    <rect x="35" y="35" width="17" height="17" rx="3"/>
+    <rect x="35" y="12" width="17" height="6" rx="3"/>
+    <rect x="12" y="46" width="17" height="6" rx="3"/>
+  </g>
+</svg>

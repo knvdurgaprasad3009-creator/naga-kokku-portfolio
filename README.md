@@ -53,6 +53,12 @@ Regenerate the social share card after changing the name, title or stats:
 npm run og
 ```
 
+Regenerate the Apple touch icon after editing `src/app/icon.svg`:
+
+```bash
+npm run icon
+```
+
 ---
 
 ## Project structure
@@ -64,6 +70,13 @@ src/
     page.tsx          Composes the 10 sections in order
     globals.css       Design tokens + shared effects (glow, outline type)
     api/chat/route.ts "Ask Naga" backend — streams from the Anthropic API
+    api/contact/route.ts  Contact form — Google Sheets + email
+    icon.svg          Favicon; apple-icon.png is generated from it
+    not-found.tsx     On-brand 404
+    robots.ts         robots.txt
+    sitemap.ts        sitemap.xml
+  lib/
+    site-url.ts       Canonical base URL, shared by metadata/sitemap/robots
   components/
     primitives.tsx    Section, SectionHead, Card, Tag, NumPill, Metric, Button
     Nav.tsx  Hero.tsx  StatStrip.tsx  SkillsTicker.tsx  About.tsx
@@ -205,6 +218,23 @@ at **build** time, so set it in Vercel before deploying, not after.
 > Windows whenever the project directory contains spaces — and it fails the
 > whole `next build`, not just the image. Driving Satori directly avoids that,
 > because every font is supplied explicitly.
+
+---
+
+## SEO & discovery
+
+- **`robots.txt`** allows everything except `/api/`, and points at the sitemap.
+- **`sitemap.xml`** carries the single page — mainly to declare the canonical host.
+- **JSON-LD `Person` schema** in the layout ties the name to the role, employer,
+  degrees and certifications. Most people reach a portfolio by searching the
+  name, so this is the part that helps them land on the right one. It's built
+  from the same `content.ts` data, so it can't drift from the page.
+- **Icons:** `src/app/icon.svg` is the source of truth; `apple-icon.png` is
+  generated from it with `npm run icon`. The mark is geometric rather than
+  lettered so it renders identically everywhere, with no font dependency.
+- **`not-found.tsx`** is an on-brand 404 marked `noindex`.
+
+All URLs resolve against `siteUrl` in `src/lib/site-url.ts`.
 
 ---
 
