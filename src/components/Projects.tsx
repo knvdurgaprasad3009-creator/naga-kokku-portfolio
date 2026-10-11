@@ -6,7 +6,7 @@ export default function Projects() {
     <Section id="projects">
       <SectionHead
         eyebrow="Flagship Work"
-        title="Four products, taken from discovery to production."
+        title="Products taken from discovery to production, and my latest AI build."
       />
 
       <div className="grid gap-5">
@@ -41,29 +41,43 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {"link" in p && p.link && (
-                  <a
-                    href={p.link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 font-mono text-[12px] text-accent transition-colors hover:text-paper"
-                  >
-                    {p.link.label}
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden
-                    >
-                      <path d="M7 17 17 7M9 7h8v8" />
-                    </svg>
-                  </a>
-                )}
+                {(() => {
+                  const links =
+                    "links" in p && p.links
+                      ? p.links
+                      : "link" in p && p.link
+                        ? [p.link]
+                        : [];
+                  if (!links.length) return null;
+                  return (
+                    <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                      {links.map((l) => (
+                        <a
+                          key={l.url}
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-[12px] text-accent transition-colors hover:text-paper"
+                        >
+                          {l.label}
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden
+                          >
+                            <path d="M7 17 17 7M9 7h8v8" />
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Headline metrics, pulled out of the prose */}

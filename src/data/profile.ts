@@ -118,6 +118,26 @@ Shanmugha Precision Forging — Manufacturing Engineer (India).
    Headline metrics: 55% loom utilization increase; 62% downtime reduction.
    Themes: digital twin, connected hardware, IoT, patents.
 
+5. **AtliQ PromiseKeeper — AI Sales & CRM Assistant** (Codebasics AI PM Cohort capstone, October 2026)
+   My capstone for the Codebasics AI Product Management cohort, taken through all seven stages: user
+   research (persona, empathy map, 5 Whys), an AI opportunity map scored on impact and feasibility, an
+   AI PRD with a North Star and eval criteria, a token cost estimate, a deployed prototype, a
+   presentation and a stakeholder demo. The problem: AtliQ, a founder-led consulting firm, kept only
+   12 of 37 client commitments on time and had $423k of pipeline waiting on a reply. The root cause
+   was a memory problem, not a lead problem: the CRM records leads, not promises.
+   The product reads emails, meeting notes and the CRM. Claude Haiku screens each document and Claude
+   Sonnet extracts every promise, client deadline and buying signal with a verbatim quote; code drops
+   any item whose quote is not in the source. Plain rules (not AI) rank a daily brief per seller and
+   propose CRM fixes for one-click human approval. It never emails a client or edits the CRM on its
+   own; ambiguous contacts, conflicting dates and prompt-injection attempts go to a "needs a human" list.
+   Evals against a hand-labelled answer key: 37 of 37 open commitments found (including all 25 the team
+   had missed), 90% precision, 100% quote faithfulness, 5 of 5 safety tests passed. Estimated running
+   cost about $60 a month in production. Built with Next.js and the Claude API, deployed on Vercel.
+   Live app: https://atliq-promisekeeper.vercel.app
+   Code and deliverables: https://github.com/knvdurgaprasad3009-creator/atliq-promisekeeper
+   Headline metrics: 37/37 open commitments found; 5/5 safety tests passed.
+   Themes: LLM extraction, evals and guardrails, human-in-the-loop, AI PRD, cost modeling.
+
 ## PRESS & PUBLIC COVERAGE
 The Bridgital Loom work has been covered publicly. Point people at these when
 asked for proof:
@@ -136,19 +156,22 @@ Only share these four links. Do not invent other coverage, outlets or dates.
 ## CORE COMPETENCIES
 
 01 — Product Strategy & Execution: Product Discovery; Roadmaps & Prioritization (MoSCoW, RICE);
-Product Analytics; Agile/Scrum; Stakeholder Alignment (CDO/CFO/Engineering/Legal); Figma Prototyping.
+Product Analytics; Agile/Scrum; Stakeholder Alignment (CDO/CFO/Engineering/Legal); Figma Prototyping;
+AI Opportunity Mapping; North Star & Success Metrics.
 
 02 — Industrial IoT & Connected Systems: Industrial IoT; Connected Products; Digital Twins;
 Sensor/Logistics API Integration; Asset & Inventory Management; Supply Chain Optimization.
 
 03 — AI & Intelligent Automation: RAG Systems; AI Assistants (AI-Q Bot); OCR-to-SAP Automation;
-RBAC; Workflow Automation; SQL; Python; Power BI.
+RBAC; AI PRDs & Eval Criteria; LLM Guardrails & Prompt-Injection Defense; Model Selection & Token
+Cost Modeling; Human-in-the-Loop Design; Workflow Automation; SQL; Python; Power BI.
 
 ## SKILLS / TOOLING
 Product Strategy, Product Discovery, Roadmaps & Prioritization, Industrial IoT, Connected Products,
 Enterprise Platforms, RAG, AI Assistants, OCR, Digital Twins, Workflow Automation, Supply Chain,
 Inventory & Asset Management, API Integrations, Product Analytics, SQL, Python, Power BI, Figma,
-Azure DevOps, Agile/Scrum, MoSCoW, RICE.
+Azure DevOps, Agile/Scrum, MoSCoW, RICE, AI Product Management, LLM Evals, AI Guardrails, Prompt
+Engineering, Claude API, Next.js, Miro.
 
 ## EDUCATION
 - MS, Industrial and Systems Engineering — University of Minnesota, Twin Cities (Minneapolis, MN)
@@ -156,7 +179,7 @@ Azure DevOps, Agile/Scrum, MoSCoW, RICE.
 
 ## CERTIFICATIONS
 - Certified Scrum Product Owner (CSPO), Scrum Alliance
-- Certified AI Product Manager, CodeBasics
+- Certified AI Product Manager, CodeBasics (AI PM Cohort, 2026); capstone: AtliQ PromiseKeeper (see project 5)
 - Project Management Certificate, Carlson School of Management
 - Generative AI for Product Managers
 
