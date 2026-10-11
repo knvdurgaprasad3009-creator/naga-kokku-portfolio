@@ -41,6 +41,7 @@ export const hero = {
     "AI & RAG Systems",
     "Enterprise Platforms",
     "Digital Twins",
+    "AI Product Management",
   ],
   sub: "7+ years building and commercializing enterprise, Industrial IoT, RAG, digital-twin, and asset-management products across global operations. I turn physical operations data into intelligent, automated software — uncovering $7.2M in unmanaged spend and eliminating $4M in unnecessary purchases along the way.",
   primaryCta: { label: "Start a Conversation", href: "#contact" },
@@ -81,13 +82,19 @@ export const skills = [
   "Figma",
   "Azure DevOps",
   "Agile/Scrum",
+  "AI Product Management",
+  "LLM Evals",
+  "AI Guardrails",
+  "Prompt Engineering",
+  "Claude API",
+  "Next.js",
 ];
 
 export const about = {
   paragraphs: [
     "Product leader with 7+ years spanning Buckman Laboratories and Tata Consultancy Services, connecting physical operations, enterprise software, and intelligent automation. I have commercialized SaaS and Industrial IoT products across six global regions, 3,000 customers, and 10,000 sites — taking products from Figma prototype to 100% adoption in production.",
     "My work sits at the intersection of hardware and software: from RAG-powered order-intake bots with 95% accuracy, to connected-loom digital twins that increased manufacturing utilization by 55%. I lead cross-functional teams across Engineering, Finance, Supply Chain, SAP, and Legal, and I prioritize ruthlessly with MoSCoW and RICE to protect the highest-ROI work.",
-    "MS in Industrial and Systems Engineering (University of Minnesota), BS in Mechatronics Engineering. CSPO certified and a Certified AI Product Manager.",
+    "MS in Industrial and Systems Engineering (University of Minnesota), BS in Mechatronics Engineering. CSPO certified and a Certified AI Product Manager (Codebasics AI PM Cohort, 2026), where my capstone, AtliQ PromiseKeeper, took an LLM sales assistant from user research to a deployed, evaluated prototype.",
   ],
   snapshot: [
     { label: "BASED IN", value: "Memphis, TN" },
@@ -110,6 +117,8 @@ export const competencies = [
       "Agile/Scrum",
       "Stakeholder Alignment (CDO/CFO/Engineering/Legal)",
       "Figma Prototyping",
+      "AI Opportunity Mapping",
+      "North Star & Success Metrics",
     ],
   },
   {
@@ -132,6 +141,10 @@ export const competencies = [
       "AI Assistants (AI-Q Bot)",
       "OCR-to-SAP Automation",
       "RBAC",
+      "AI PRDs & Eval Criteria",
+      "LLM Guardrails & Prompt-Injection Defense",
+      "Model Selection & Token Cost Modeling",
+      "Human-in-the-Loop Design",
       "Workflow Automation",
       "SQL",
       "Python",
@@ -188,6 +201,21 @@ export const projects = [
       label: "Read the Tata Group story",
       url: "https://www.tata.com/newsroom/business/tcs-digital-loom",
     },
+  },
+  {
+    fig: "05",
+    org: "CODEBASICS AI PM CAPSTONE · 2026",
+    title: "AtliQ PromiseKeeper — AI Sales & CRM Assistant",
+    body: "Took an AI product from discovery to a deployed prototype for a founder-led consulting firm losing deals it had already earned: only 12 of 37 client commitments were kept and $423k of pipeline was waiting on a reply. Found the root cause (a memory problem, not a lead problem), mapped and scored AI opportunities, wrote the AI PRD and cost model, then vibe-coded the product. Claude reads emails and meeting notes and extracts every promise, deadline and buying signal with a verbatim quote; plain rules rank a daily brief and propose CRM fixes for one-click approval. It never emails a client or changes the CRM on its own.",
+    metrics: [
+      { num: "37/37", label: "Open commitments found vs. answer key" },
+      { num: "5/5", label: "Safety tests passed" },
+    ],
+    tags: ["LLM Extraction", "Evals & Guardrails", "Human-in-the-Loop", "Claude API", "Next.js"],
+    links: [
+      { label: "Try the live app", url: "https://atliq-promisekeeper.vercel.app" },
+      { label: "Code & deliverables", url: "https://github.com/knvdurgaprasad3009-creator/atliq-promisekeeper" },
+    ],
   },
 ];
 
@@ -405,7 +433,7 @@ export const education = [
 
 export const certifications = [
   { name: "Certified Scrum Product Owner (CSPO)", org: "Scrum Alliance" },
-  { name: "Certified AI Product Manager", org: "CodeBasics" },
+  { name: "Certified AI Product Manager", org: "CodeBasics · AI PM Cohort, 2026" },
   { name: "Project Management Certificate", org: "Carlson School of Management" },
   { name: "Generative AI for Product Managers", org: "" },
 ];
